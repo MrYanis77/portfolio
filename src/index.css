@@ -1,0 +1,7 @@
+/* index.css */
+@import "tailwindcss";
+@plugin "./hero.ts";
+
+/* On remonte d'un seul niveau pour sortir de 'src' et entrer dans 'node_modules' */
+@source "../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
+
