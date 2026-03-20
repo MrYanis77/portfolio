@@ -3,11 +3,15 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import projectGame1 from "@/assets/project-game-1.jpg";
 import projectGame2 from "@/assets/project-game-2.jpg";
 import projectGame3 from "@/assets/project-game-3.jpg";
+import projectGame4 from "@/assets/project-game-4.jpg";
+import projectGame5 from "@/assets/project-game-5.jpg";
 
 const projects = [
   { image: projectGame1, title: "Void Station", category: "Unreal Engine 5", tech: "C++ / Blueprints" },
   { image: projectGame2, title: "Pixel Brawl", category: "2D Platformer", tech: "Unity / C#" },
   { image: projectGame3, title: "Ember Gate", category: "Action RPG", tech: "Custom Engine / C++" },
+  { image: projectGame4, title: "Neon Command", category: "Sci-Fi Strategy", tech: "C++ / Custom Engine" },
+  { image: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
 ];
 
 const ProjectCarousel = () => {
