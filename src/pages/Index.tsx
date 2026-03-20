@@ -178,6 +178,8 @@ const Index = () => {
                 { src: thumb1, label: "Gameplay Systems", rotate: "-2deg" },
                 { src: thumb2, label: "Character Tech", rotate: "1deg" },
                 { src: thumb3, label: "Physics Engine", rotate: "-1deg" },
+                { src: thumb4, label: "3D Modeling", rotate: "2deg" },
+                { src: thumb5, label: "VFX Particles", rotate: "-1.5deg" },
               ].map((t) => (
                 <div key={t.label} className="relative group cursor-pointer flex-1 collage-frame" style={{ transform: `rotate(${t.rotate})` }}>
                   <div className="overflow-hidden torn-edge">
