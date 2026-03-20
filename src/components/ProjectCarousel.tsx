@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
+import projectGame1 from "@/assets/project-game-1.jpg";
+import projectGame2 from "@/assets/project-game-2.jpg";
+import projectGame3 from "@/assets/project-game-3.jpg";
 
 const projects = [
-  { image: project1, title: "Abéran Botanics", category: "Packaging & Identité" },
-  { image: project2, title: "Maison Rivière", category: "Architecture intérieure" },
-  { image: project3, title: "Terracotta Editorial", category: "Direction artistique" },
+  { image: projectGame1, title: "Void Station", category: "Unreal Engine 5", tech: "C++ / Blueprints" },
+  { image: projectGame2, title: "Pixel Brawl", category: "2D Platformer", tech: "Unity / C#" },
+  { image: projectGame3, title: "Ember Gate", category: "Action RPG", tech: "Custom Engine / C++" },
 ];
 
 const ProjectCarousel = () => {
@@ -18,87 +18,74 @@ const ProjectCarousel = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrent(index);
-    setTimeout(() => setIsTransitioning(false), 600);
+    setTimeout(() => setIsTransitioning(false), 500);
   }, [isTransitioning]);
 
   const next = useCallback(() => goTo((current + 1) % projects.length), [current, goTo]);
   const prev = useCallback(() => goTo((current - 1 + projects.length) % projects.length), [current, goTo]);
 
   useEffect(() => {
-    const timer = setInterval(next, 4500);
+    const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
   }, [next]);
 
   return (
-    <div className="relative w-full max-w-[520px]">
-      {/* Main image */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-xl shadow-foreground/5">
+    <div className="w-full">
+      {/* Main carousel */}
+      <div className="relative aspect-[3/2] overflow-hidden border border-border bg-card">
         {projects.map((project, i) => (
           <div
             key={i}
-            className="absolute inset-0 transition-all duration-600"
+            className="absolute inset-0"
             style={{
               opacity: i === current ? 1 : 0,
-              transform: i === current ? "scale(1)" : "scale(1.04)",
-              transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+              transform: i === current ? "scale(1)" : "scale(1.03)",
+              transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)",
             }}
           >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="h-full w-full object-cover"
-              loading={i === 0 ? "eager" : "lazy"}
-            />
+            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            {/* Bottom info bar */}
+            <div className="absolute bottom-0 left-0 right-0 bg-background/85 backdrop-blur-sm border-t border-border px-4 py-3 flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-semibold text-foreground">{project.title}</h3>
+                <p className="text-xs text-muted-foreground">{project.category}</p>
+              </div>
+              <span className="font-mono text-[10px] text-primary tracking-wider">{project.tech}</span>
+            </div>
           </div>
         ))}
 
-        {/* Info overlay at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <div className="rounded-md bg-background/90 backdrop-blur-sm px-4 py-3">
-            <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
-              {projects[current].category}
-            </p>
-            <h3 className="font-display text-lg text-foreground mt-0.5" style={{ lineHeight: 1.2 }}>
-              {projects[current].title}
-            </h3>
-          </div>
-        </div>
+        {/* Nav arrows inside */}
+        <button
+          onClick={prev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 h-7 w-7 bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors active:scale-95"
+        >
+          <ChevronLeft className="h-3.5 w-3.5" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7 bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors active:scale-95"
+        >
+          <ChevronRight className="h-3.5 w-3.5" />
+        </button>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-between mt-4">
-        <div className="flex gap-2">
-          {projects.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className="h-1.5 rounded-full transition-all duration-300"
-              style={{
-                width: i === current ? 28 : 8,
-                backgroundColor: i === current
-                  ? "hsl(var(--primary))"
-                  : "hsl(var(--border))",
-              }}
-              aria-label={`Projet ${i + 1}`}
-            />
-          ))}
-        </div>
-        <div className="flex gap-1">
+      {/* Dots */}
+      <div className="flex gap-1.5 mt-3 justify-end items-center">
+        <span className="font-mono text-[10px] text-muted-foreground mr-2">
+          {String(current + 1).padStart(2, "0")}/{String(projects.length).padStart(2, "0")}
+        </span>
+        {projects.map((_, i) => (
           <button
-            onClick={prev}
-            className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors active:scale-95"
-            aria-label="Précédent"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            onClick={next}
-            className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors active:scale-95"
-            aria-label="Suivant"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
+            key={i}
+            onClick={() => goTo(i)}
+            className="h-1 transition-all duration-300"
+            style={{
+              width: i === current ? 20 : 6,
+              backgroundColor: i === current ? "hsl(var(--primary))" : "hsl(var(--border))",
+            }}
+          />
+        ))}
       </div>
     </div>
   );
