@@ -169,11 +169,6 @@ const Index = () => {
 
           {/* Right — Carousel + collage thumbnails */}
           <div className="flex flex-col gap-6 animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
-            <div className="flex gap-2">
-              {["All", "3D / FPS", "2D / Platformer", "Engine"].map((cat, i) => (
-                <button key={cat} className={`text-[10px] px-4 py-2 font-mono uppercase tracking-wider transition-all active:scale-95 ${i === 0 ? "bg-primary text-primary-foreground font-bold" : "border border-border text-muted-foreground hover:border-primary hover:text-primary"}`}>{cat}</button>
-              ))}
-            </div>
             <ProjectCarousel />
             {/* Collage-style thumbnails with torn edges */}
             <div className="flex gap-4 mt-2">
