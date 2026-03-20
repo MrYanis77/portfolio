@@ -31,19 +31,19 @@ const ProjectCarousel = () => {
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-border/60 bg-secondary shadow-xl shadow-primary/5">
+      <div className="relative aspect-[3/2] overflow-hidden torn-edge bg-muted">
         {projects.map((project, i) => (
           <div
             key={i}
             className="absolute inset-0"
             style={{
               opacity: i === current ? 1 : 0,
-              transform: i === current ? "scale(1)" : "scale(1.03)",
-              transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)",
+              transform: i === current ? "scale(1)" : "scale(1.05)",
+              transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
             }}
           >
             <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-card/90 backdrop-blur-md border-t border-border/40 px-5 py-3.5 flex items-center justify-between">
+            <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm px-5 py-3 flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-bold text-foreground">{project.title}</h3>
                 <p className="text-xs text-muted-foreground">{project.category}</p>
@@ -55,19 +55,19 @@ const ProjectCarousel = () => {
 
         <button
           onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-xl bg-card/70 backdrop-blur-sm border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all active:scale-95 shadow-md"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
         <button
           onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-xl bg-card/70 backdrop-blur-sm border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all active:scale-95 shadow-md"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
       </div>
 
-      <div className="flex gap-2 mt-3 justify-end items-center">
+      <div className="flex gap-2 mt-4 justify-end items-center">
         <span className="font-mono text-[11px] text-muted-foreground mr-2">
           {String(current + 1).padStart(2, "0")}/{String(projects.length).padStart(2, "0")}
         </span>
@@ -75,7 +75,7 @@ const ProjectCarousel = () => {
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-6 bg-primary' : 'w-2 bg-border hover:bg-muted-foreground'}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-7 bg-primary' : 'w-2 bg-border hover:bg-muted-foreground'}`}
           />
         ))}
       </div>

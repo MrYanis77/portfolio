@@ -35,24 +35,25 @@ function Section({ children, className = "", id, delay = 0 }: { children: React.
   );
 }
 
-function SectionTitle({ icon: Icon, label, accent = false }: { icon: React.ElementType; label: string; accent?: boolean }) {
+function SectionTitle({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
   return (
     <div className="flex items-center gap-3 mb-10">
-      <div className={`h-10 w-10 rounded-2xl flex items-center justify-center ${accent ? 'bg-accent/10' : 'bg-primary/10'}`}>
-        <Icon className={`h-5 w-5 ${accent ? 'text-accent' : 'text-primary'}`} />
+      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+        <Icon className="h-5 w-5 text-primary" />
       </div>
-      <h2 className="font-display text-2xl font-bold text-foreground tracking-tight">{label}</h2>
+      <h2 className="font-display text-3xl font-extrabold text-foreground tracking-tight uppercase">{label}</h2>
+      <div className="flex-1 h-px bg-border ml-4" />
     </div>
   );
 }
 
 /* ── Data ── */
 const parcours = [
-  { year: "2024", text: "Lead Game Programmer — Studio indépendant", color: "bg-primary" },
-  { year: "2023", text: "Gameplay Programmer — AAA Studio", color: "bg-accent" },
-  { year: "2021", text: "Junior Engine Programmer — Mobile Gaming", color: "bg-primary" },
-  { year: "2020", text: "Stage développement jeu — Startup VR", color: "bg-accent" },
-  { year: "2019", text: "Diplôme Ingénieur Informatique — Spé Jeux Vidéo", color: "bg-primary" },
+  { year: "2024", text: "Lead Game Programmer — Studio indépendant", highlight: true },
+  { year: "2023", text: "Gameplay Programmer — AAA Studio", highlight: false },
+  { year: "2021", text: "Junior Engine Programmer — Mobile Gaming", highlight: true },
+  { year: "2020", text: "Stage développement jeu — Startup VR", highlight: false },
+  { year: "2019", text: "Diplôme Ingénieur Informatique — Spé Jeux Vidéo", highlight: true },
 ];
 
 const experiences = [
@@ -105,53 +106,52 @@ const certifications = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-hidden relative">
-      {/* Decorative blobs */}
-      <div className="fixed top-20 -right-32 w-96 h-96 bg-primary/5 blob animate-float pointer-events-none" />
-      <div className="fixed bottom-40 -left-24 w-72 h-72 bg-accent/5 blob animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
-      <div className="fixed top-1/2 right-1/4 w-48 h-48 bg-primary/3 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-background overflow-hidden relative noise">
+      {/* Decorative circles - collage style */}
+      <div className="fixed bottom-8 left-8 w-20 h-20 rounded-full bg-primary/10 pointer-events-none" />
+      <div className="fixed bottom-8 left-24 w-16 h-16 rounded-full bg-primary/5 pointer-events-none" />
+      <div className="fixed top-1/3 right-12 w-24 h-24 rounded-full border border-border pointer-events-none" />
 
       {/* Nav */}
-      <nav className="border-b border-border/60 px-6 py-4 flex items-center justify-between sticky top-0 bg-background/80 backdrop-blur-md z-50">
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-xl bg-primary flex items-center justify-center">
-            <Sparkles className="h-4 w-4 text-primary-foreground" />
-          </div>
-          <span className="font-display text-base font-bold text-foreground">GameDev</span>
+      <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
+        <div className="flex items-center gap-3">
+          <div className="h-3 w-3 rounded-full bg-primary" />
+          <span className="font-display text-lg font-extrabold text-foreground uppercase tracking-widest">GameDev</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           {[
             { href: "#parcours", label: "Parcours" },
             { href: "#projets", label: "Projets" },
             { href: "#competences", label: "Skills" },
           ].map((link) => (
-            <a key={link.href} href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{link.label}</a>
+            <a key={link.href} href={link.href} className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider">{link.label}</a>
           ))}
-          <a href="#" className="text-sm font-semibold text-primary-foreground bg-primary px-4 py-2 rounded-xl hover:opacity-90 transition-opacity active:scale-95">Contact</a>
+          <a href="#" className="text-xs font-mono font-bold text-primary-foreground bg-primary px-5 py-2 hover:brightness-110 transition-all active:scale-95 uppercase tracking-wider">Contact</a>
         </div>
       </nav>
 
       {/* Hero */}
-      <main className="px-6 lg:px-10 py-12 lg:py-20 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-16">
+      <main className="px-6 lg:px-10 py-16 lg:py-24 max-w-[1400px] mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
+          {/* Left — Intro */}
           <div className="flex flex-col justify-center animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold w-fit mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono w-fit mb-8 uppercase tracking-wider">
               <Gamepad2 className="h-3.5 w-3.5" />
               Game Programmer
             </div>
-            <h1 className="font-display text-4xl lg:text-5xl font-extrabold text-foreground leading-[1.1] tracking-tight text-balance">
-              Créer des mondes,
+            <h1 className="font-display text-5xl lg:text-7xl font-extrabold text-foreground leading-[0.95] tracking-tight uppercase">
+              Créer
               <br />
-              <span className="gradient-text">une ligne de code</span>
+              des
               <br />
-              à la fois
+              <span className="gradient-text">mondes</span>
             </h1>
-            <p className="mt-5 text-base text-muted-foreground leading-relaxed max-w-md">
+            <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm font-mono">
               Game programmer spécialisé en gameplay systems, moteurs physiques et architecture réseau. Passionné par l'optimisation et les systèmes complexes.
             </p>
-            <div className="flex flex-wrap gap-2 mt-7">
+            <div className="flex flex-wrap gap-2 mt-8">
               {["C++", "C#", "Unreal", "Unity", "OpenGL"].map((t) => (
-                <span key={t} className="text-xs px-3 py-1.5 rounded-lg bg-secondary text-secondary-foreground font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-default">{t}</span>
+                <span key={t} className="text-[10px] px-3 py-1.5 border border-border text-muted-foreground font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-colors cursor-default">{t}</span>
               ))}
             </div>
             <div className="flex gap-3 mt-8">
@@ -160,26 +160,34 @@ const Index = () => {
                 { Icon: Linkedin, label: "LinkedIn" },
                 { Icon: Mail, label: "Email" },
               ].map(({ Icon, label }) => (
-                <a key={label} href="#" className="h-10 w-10 rounded-xl bg-card border border-border/60 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all active:scale-95">
+                <a key={label} href="#" className="h-10 w-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90">
                   <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
+          {/* Right — Carousel + collage thumbnails */}
+          <div className="flex flex-col gap-6 animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
             <div className="flex gap-2">
               {["All", "3D / FPS", "2D / Platformer", "Engine"].map((cat, i) => (
-                <button key={cat} className={`text-xs px-4 py-2 rounded-xl font-medium transition-all active:scale-95 ${i === 0 ? "bg-primary text-primary-foreground shadow-md shadow-primary/20" : "bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary"}`}>{cat}</button>
+                <button key={cat} className={`text-[10px] px-4 py-2 font-mono uppercase tracking-wider transition-all active:scale-95 ${i === 0 ? "bg-primary text-primary-foreground font-bold" : "border border-border text-muted-foreground hover:border-primary hover:text-primary"}`}>{cat}</button>
               ))}
             </div>
             <ProjectCarousel />
-            <div className="flex gap-3 mt-1">
-              {[{ src: thumb1, label: "Gameplay Systems" }, { src: thumb2, label: "Character Tech" }, { src: thumb3, label: "Physics Engine" }].map((t) => (
-                <div key={t.label} className="relative group cursor-pointer overflow-hidden rounded-xl border border-border/60 flex-1 hover:shadow-lg hover:shadow-primary/5 transition-all">
-                  <img src={t.src} alt={t.label} className="w-full h-20 object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 bg-card/90 backdrop-blur-sm px-2.5 py-1.5">
-                    <span className="font-mono text-[9px] text-muted-foreground">{t.label}</span>
+            {/* Collage-style thumbnails with torn edges */}
+            <div className="flex gap-4 mt-2">
+              {[
+                { src: thumb1, label: "Gameplay Systems", rotate: "-2deg" },
+                { src: thumb2, label: "Character Tech", rotate: "1deg" },
+                { src: thumb3, label: "Physics Engine", rotate: "-1deg" },
+              ].map((t) => (
+                <div key={t.label} className="relative group cursor-pointer flex-1 collage-frame" style={{ transform: `rotate(${t.rotate})` }}>
+                  <div className="overflow-hidden torn-edge">
+                    <img src={t.src} alt={t.label} className="w-full h-24 object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                  </div>
+                  <div className="mt-2">
+                    <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-wider">{t.label}</span>
                   </div>
                 </div>
               ))}
@@ -189,18 +197,18 @@ const Index = () => {
       </main>
 
       {/* ════════════════════ SECTIONS ════════════════════ */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24 space-y-24">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24 space-y-28 relative z-10">
 
         {/* ── Parcours ── */}
         <Section id="parcours">
           <SectionTitle icon={Layers} label="Mon Parcours" />
           <div className="relative pl-8">
-            <div className="absolute left-3 top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 rounded-full" />
+            <div className="absolute left-3 top-2 bottom-2 w-px bg-primary/30" />
             {parcours.map((p, i) => (
               <div key={i} className="relative mb-8 last:mb-0 group">
-                <div className={`absolute -left-[21px] top-1.5 h-4 w-4 rounded-full ${p.color} ring-4 ring-background shadow-md group-hover:scale-125 transition-transform`} />
-                <div className="bg-card rounded-2xl border border-border/60 p-5 ml-2 hover:shadow-lg hover:shadow-primary/5 transition-all">
-                  <span className="font-mono text-xs text-primary font-semibold">{p.year}</span>
+                <div className={`absolute -left-[21px] top-2 h-3 w-3 rounded-full ${p.highlight ? 'bg-primary' : 'bg-border'} ring-4 ring-background group-hover:scale-150 transition-transform`} />
+                <div className="bg-card border border-border p-5 ml-2 hover:border-primary/30 transition-all">
+                  <span className="font-mono text-xs text-primary font-bold">{p.year}</span>
                   <p className="text-sm text-foreground mt-1 font-medium">{p.text}</p>
                 </div>
               </div>
@@ -210,21 +218,21 @@ const Index = () => {
 
         {/* ── Expérience Pro ── */}
         <Section id="experience">
-          <SectionTitle icon={Briefcase} label="Expérience Professionnelle" accent />
+          <SectionTitle icon={Briefcase} label="Expérience" />
           <div className="space-y-5">
             {experiences.map((exp, i) => (
-              <div key={i} className="bg-card rounded-2xl border border-border/60 p-6 hover:shadow-xl hover:shadow-accent/5 hover:border-accent/20 transition-all group">
+              <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
                   <div>
-                    <h3 className="text-base font-bold text-foreground group-hover:text-accent transition-colors">{exp.role}</h3>
-                    <p className="text-sm text-muted-foreground">{exp.company}</p>
+                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{exp.role}</h3>
+                    <p className="text-sm text-muted-foreground font-mono">{exp.company}</p>
                   </div>
-                  <span className="font-mono text-xs text-accent/70 font-medium">{exp.period}</span>
+                  <span className="font-mono text-xs text-primary/70 font-medium">{exp.period}</span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">{exp.desc}</p>
                 <div className="flex gap-2 flex-wrap">
                   {exp.tags.map((tag) => (
-                    <span key={tag} className="text-[11px] px-2.5 py-1 rounded-lg bg-accent/10 text-accent font-medium">{tag}</span>
+                    <span key={tag} className="text-[10px] px-2.5 py-1 border border-primary/20 text-primary font-mono uppercase tracking-wider">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -235,14 +243,14 @@ const Index = () => {
         {/* ── Projets ── */}
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
-          <div className="mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-5">
+          <div className="mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono mb-6 uppercase tracking-wider">
               <Trophy className="h-3.5 w-3.5" />
               Projets professionnels
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projetsPro.map((p, i) => (
-                <div key={i} className="bg-card rounded-2xl border border-border/60 p-6 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all group cursor-pointer">
+                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
                     <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
@@ -254,19 +262,19 @@ const Index = () => {
             </div>
           </div>
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono mb-6 uppercase tracking-wider">
               <Code2 className="h-3.5 w-3.5" />
               Projets personnels
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {projetsPerso.map((p, i) => (
-                <div key={i} className="bg-card rounded-2xl border border-border/60 p-6 hover:shadow-xl hover:shadow-accent/5 hover:border-accent/20 transition-all group cursor-pointer">
+                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-bold text-foreground group-hover:text-accent transition-colors">{p.title}</h3>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-accent transition-all" />
+                    <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                  <span className="font-mono text-[11px] text-accent/60 font-medium">{p.tech}</span>
+                  <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
                 </div>
               ))}
             </div>
@@ -278,13 +286,13 @@ const Index = () => {
           <SectionTitle icon={GraduationCap} label="Formations" />
           <div className="space-y-5">
             {formations.map((f, i) => (
-              <div key={i} className="flex items-start gap-5 bg-card rounded-2xl border border-border/60 p-6 hover:shadow-lg hover:shadow-primary/5 transition-all">
-                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+              <div key={i} className="flex items-start gap-5 bg-card border border-border p-6 hover:border-primary/30 transition-all">
+                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <GraduationCap className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-foreground">{f.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">{f.school} — {f.year}</p>
+                  <p className="text-sm text-muted-foreground font-mono mt-0.5">{f.school} — {f.year}</p>
                   <p className="text-sm text-muted-foreground mt-1">{f.detail}</p>
                 </div>
               </div>
@@ -294,14 +302,14 @@ const Index = () => {
 
         {/* ── Qualités ── */}
         <Section>
-          <SectionTitle icon={Star} label="Qualités" accent />
+          <SectionTitle icon={Star} label="Qualités" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {qualites.map((q, i) => (
-              <div key={i} className="bg-card rounded-2xl border border-border/60 p-6 hover:shadow-xl hover:shadow-accent/5 hover:border-accent/20 transition-all group">
-                <div className="h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <q.icon className="h-5 w-5 text-accent" />
+              <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <q.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-sm font-bold text-foreground mb-1.5">{q.label}</h3>
+                <h3 className="text-sm font-bold text-foreground mb-1.5 uppercase tracking-wide">{q.label}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{q.desc}</p>
               </div>
             ))}
@@ -311,16 +319,16 @@ const Index = () => {
         {/* ── Compétences ── */}
         <Section id="competences">
           <SectionTitle icon={Terminal} label="Compétences" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
             {competences.map((c, i) => (
               <div key={i} className="group">
                 <div className="flex justify-between mb-2">
                   <span className="font-mono text-sm text-foreground font-medium">{c.name}</span>
-                  <span className="font-mono text-xs text-primary font-semibold">{c.level}%</span>
+                  <span className="font-mono text-xs text-primary font-bold">{c.level}%</span>
                 </div>
-                <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                <div className="h-1.5 bg-secondary overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-700"
+                    className="h-full bg-primary transition-all duration-700"
                     style={{ width: `${c.level}%` }}
                   />
                 </div>
@@ -334,13 +342,13 @@ const Index = () => {
           <SectionTitle icon={Award} label="Certifications" />
           <div className="space-y-4">
             {certifications.map((c, i) => (
-              <div key={i} className="flex items-center gap-5 bg-card rounded-2xl border border-border/60 p-5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all group">
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <div key={i} className="flex items-center gap-5 bg-card border border-border p-5 hover:border-primary/30 transition-all group">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Award className="h-5 w-5 text-primary" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm font-bold text-foreground">{c.title}</h3>
-                  <p className="text-sm text-muted-foreground">{c.org}</p>
+                  <p className="text-sm text-muted-foreground font-mono">{c.org}</p>
                 </div>
                 <span className="font-mono text-xs text-primary/60 font-medium">{c.year}</span>
               </div>
@@ -351,8 +359,8 @@ const Index = () => {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border/60 px-6 py-8 text-center bg-card/50">
-        <p className="text-sm text-muted-foreground">© 2024 GameDev — Built with passion & C++</p>
+      <footer className="border-t border-border px-6 py-10 text-center relative z-10">
+        <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">© 2024 GameDev — Built with passion & C++</p>
       </footer>
     </div>
   );
