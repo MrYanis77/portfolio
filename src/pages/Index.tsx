@@ -132,7 +132,7 @@ const Index = () => {
 
       {/* Hero */}
       <main className="px-6 lg:px-10 py-16 lg:py-24 max-w-[1400px] mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-12 md:gap-16 lg:gap-20 items-start">
           {/* Left — Intro */}
           <div className="flex flex-col justify-center animate-fade-up">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono w-fit mb-8 uppercase tracking-wider">
