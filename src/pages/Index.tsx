@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles } from "lucide-react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import thumb1 from "@/assets/thumb-1.jpg";
@@ -6,6 +6,9 @@ import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
 import thumb4 from "@/assets/thumb-4.jpg";
 import thumb5 from "@/assets/thumb-5.jpg";
+import projectGame1 from "@/assets/project-game-1.jpg";
+import projectGame4 from "@/assets/project-game-4.jpg";
+import projectGame5 from "@/assets/project-game-5.jpg";
 
 /* ── Scroll reveal hook ── */
 function useScrollReveal(delay = 0) {
