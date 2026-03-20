@@ -4,6 +4,8 @@ import ProjectCarousel from "@/components/ProjectCarousel";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
+import thumb4 from "@/assets/thumb-4.jpg";
+import thumb5 from "@/assets/thumb-5.jpg";
 
 /* ── Scroll reveal hook ── */
 function useScrollReveal(delay = 0) {
