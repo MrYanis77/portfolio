@@ -349,13 +349,18 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {projetsPerso.map((p, i) => (
-                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                  <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
+                    <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                  </div>
                 </div>
               ))}
             </div>
