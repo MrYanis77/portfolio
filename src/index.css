@@ -197,9 +197,9 @@
   animation: float 4s ease-in-out infinite;
 }
 
-/* Creative gradient text — neon lime */
+/* Creative gradient text — cream green */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(72 100% 50%), hsl(90 80% 60%), hsl(72 100% 50%));
+  background: linear-gradient(135deg, hsl(100 35% 42%), hsl(120 30% 50%), hsl(100 35% 42%));
   background-size: 200% 200%;
   animation: gradient-shift 4s ease infinite;
   -webkit-background-clip: text;
