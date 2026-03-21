@@ -8,6 +8,8 @@ import thumb3 from "@/assets/thumb-3.jpg";
 import thumb4 from "@/assets/thumb-4.jpg";
 import thumb5 from "@/assets/thumb-5.jpg";
 import projectGame1 from "@/assets/project-game-1.jpg";
+import projectGame2 from "@/assets/project-game-2.jpg";
+import projectGame3 from "@/assets/project-game-3.jpg";
 import projectGame4 from "@/assets/project-game-4.jpg";
 import projectGame5 from "@/assets/project-game-5.jpg";
 
@@ -298,6 +300,25 @@ const Index = () => {
         {/* ── Projets ── */}
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
+
+          {/* Marquee images */}
+          <div className="mb-10 space-y-3 overflow-hidden">
+            <div className="animate-marquee-left flex w-[200%] gap-3">
+              {[projectGame1, projectGame2, projectGame3, projectGame4, projectGame5, projectGame1, projectGame2, projectGame3, projectGame4, projectGame5].map((img, i) => (
+                <div key={i} className="h-32 w-56 shrink-0 overflow-hidden border border-border">
+                  <img src={img} alt="" className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+            <div className="animate-marquee-right flex w-[200%] gap-3">
+              {[projectGame3, projectGame5, projectGame1, projectGame4, projectGame2, projectGame3, projectGame5, projectGame1, projectGame4, projectGame2].map((img, i) => (
+                <div key={i} className="h-32 w-56 shrink-0 overflow-hidden border border-border">
+                  <img src={img} alt="" className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono mb-6 uppercase tracking-wider">
               <Trophy className="h-3.5 w-3.5" />
