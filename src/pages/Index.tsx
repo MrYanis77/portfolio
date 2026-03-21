@@ -149,38 +149,28 @@ const Index = () => {
           </h1>
         </div>
 
-        {/* Scattered collage images over the text */}
-        {/* Circle image — left */}
-        <div className="absolute left-[5%] top-[35%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <div className="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-background collage-frame group cursor-pointer">
-            <img src={projectGame5} alt="Dungeon RPG" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        {/* Scattered collage rectangles over the text */}
+        <div className="absolute left-[3%] top-[20%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+          <div className="w-36 md:w-48 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-8deg)" }}>
+            <img src={projectGame5} alt="Dungeon RPG" className="w-full h-auto aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-500" />
           </div>
         </div>
 
-        {/* Tilted image — top right */}
-        <div className="absolute right-[8%] top-[12%] z-20 animate-fade-up" style={{ animationDelay: "0.35s" }}>
-          <div className="w-36 md:w-52 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(6deg)" }}>
-            <div className="torn-edge">
-              <img src={projectGame4} alt="Neon Command" className="w-full h-auto aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
+        <div className="absolute right-[5%] top-[8%] z-20 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          <div className="w-40 md:w-56 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(5deg)" }}>
+            <img src={projectGame4} alt="Neon Command" className="w-full h-auto aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
 
-        {/* Tilted image — center bottom */}
-        <div className="absolute left-[35%] bottom-[10%] z-20 animate-fade-up" style={{ animationDelay: "0.5s" }}>
-          <div className="w-40 md:w-56 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-4deg)" }}>
-            <div className="torn-edge">
-              <img src={projectGame1} alt="Void Station" className="w-full h-auto aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
+        <div className="absolute left-[28%] bottom-[5%] z-20 animate-fade-up" style={{ animationDelay: "0.5s" }}>
+          <div className="w-44 md:w-60 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(3deg)" }}>
+            <img src={projectGame1} alt="Void Station" className="w-full h-auto aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
 
-        {/* Small tilted thumbnail — right middle */}
-        <div className="absolute right-[15%] bottom-[25%] z-20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-          <div className="w-24 md:w-32 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(3deg)" }}>
-            <div className="torn-edge">
-              <img src={thumb4} alt="3D Modeling" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" />
-            </div>
+        <div className="absolute right-[20%] bottom-[18%] z-20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
+          <div className="w-28 md:w-40 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-6deg)" }}>
+            <img src={thumb4} alt="3D Modeling" className="w-full h-auto aspect-[3/2] object-cover group-hover:scale-110 transition-transform duration-500" />
           </div>
         </div>
 
