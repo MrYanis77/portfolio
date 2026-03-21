@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
+import ThemeToggle from "@/components/ThemeToggle";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
