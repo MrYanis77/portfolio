@@ -326,13 +326,18 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projetsPro.map((p, i) => (
-                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                    <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                  <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
+                    <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                  </div>
                 </div>
               ))}
             </div>
