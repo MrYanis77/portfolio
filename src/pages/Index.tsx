@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
+import ThemeToggle from "@/components/ThemeToggle";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
@@ -128,6 +129,7 @@ const Index = () => {
             <a key={link.href} href={link.href} className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider">{link.label}</a>
           ))}
           <a href="#" className="text-xs font-mono font-bold text-primary-foreground bg-primary px-5 py-2 hover:brightness-110 transition-all active:scale-95 uppercase tracking-wider">Contact</a>
+          <ThemeToggle />
         </div>
       </nav>
 
