@@ -71,14 +71,14 @@ const experiences = [
 ];
 
 const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++" },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK" },
+  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1 },
+  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2 },
 ];
 
 const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2" },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity" },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL" },
+  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3 },
+  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4 },
+  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5 },
 ];
 
 const formations = [
@@ -301,23 +301,6 @@ const Index = () => {
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
 
-          {/* Marquee images */}
-          <div className="mb-10 space-y-3 overflow-hidden">
-            <div className="animate-marquee-left flex w-[200%] gap-3">
-              {[projectGame1, projectGame2, projectGame3, projectGame4, projectGame5, projectGame1, projectGame2, projectGame3, projectGame4, projectGame5].map((img, i) => (
-                <div key={i} className="h-32 w-56 shrink-0 overflow-hidden border border-border">
-                  <img src={img} alt="" className="h-full w-full object-cover" />
-                </div>
-              ))}
-            </div>
-            <div className="animate-marquee-right flex w-[200%] gap-3">
-              {[projectGame3, projectGame5, projectGame1, projectGame4, projectGame2, projectGame3, projectGame5, projectGame1, projectGame4, projectGame2].map((img, i) => (
-                <div key={i} className="h-32 w-56 shrink-0 overflow-hidden border border-border">
-                  <img src={img} alt="" className="h-full w-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
 
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono mb-6 uppercase tracking-wider">
@@ -326,13 +309,18 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projetsPro.map((p, i) => (
-                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                    <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                  <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
+                    <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -344,13 +332,18 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {projetsPerso.map((p, i) => (
-                <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                  <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
+                    <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                  </div>
                 </div>
               ))}
             </div>
