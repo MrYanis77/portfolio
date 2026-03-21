@@ -8,6 +8,8 @@ import thumb3 from "@/assets/thumb-3.jpg";
 import thumb4 from "@/assets/thumb-4.jpg";
 import thumb5 from "@/assets/thumb-5.jpg";
 import projectGame1 from "@/assets/project-game-1.jpg";
+import projectGame2 from "@/assets/project-game-2.jpg";
+import projectGame3 from "@/assets/project-game-3.jpg";
 import projectGame4 from "@/assets/project-game-4.jpg";
 import projectGame5 from "@/assets/project-game-5.jpg";
 
