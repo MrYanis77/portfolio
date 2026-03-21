@@ -206,7 +206,7 @@ const Index = () => {
               <span key={t} className="text-[9px] px-2.5 py-1 border border-border text-muted-foreground font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-colors cursor-default">{t}</span>
             ))}
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
             {[
               { Icon: Github, label: "GitHub" },
               { Icon: Linkedin, label: "LinkedIn" },
@@ -216,6 +216,10 @@ const Index = () => {
                 <Icon className="h-3.5 w-3.5" />
               </a>
             ))}
+            <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" download className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-mono font-bold uppercase tracking-wider hover:brightness-110 transition-all active:scale-95">
+              <FileDown className="h-3.5 w-3.5" />
+              CV PDF
+            </a>
           </div>
         </div>
       </main>
