@@ -15,8 +15,8 @@
     --popover: 40 25% 90%;
     --popover-foreground: 30 10% 15%;
 
-    --primary: 100 35% 42%;
-    --primary-foreground: 40 30% 96%;
+    --primary: 80 40% 35%;
+    --primary-foreground: 45 30% 96%;
 
     --secondary: 40 18% 86%;
     --secondary-foreground: 30 10% 30%;
@@ -24,26 +24,26 @@
     --muted: 40 15% 88%;
     --muted-foreground: 30 8% 45%;
 
-    --accent: 100 35% 42%;
-    --accent-foreground: 40 30% 96%;
+    --accent: 80 40% 35%;
+    --accent-foreground: 45 30% 96%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 35 15% 82%;
     --input: 35 15% 82%;
-    --ring: 100 35% 42%;
+    --ring: 80 40% 35%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 40 25% 91%;
     --sidebar-foreground: 30 8% 45%;
-    --sidebar-primary: 100 35% 42%;
-    --sidebar-primary-foreground: 40 30% 96%;
+    --sidebar-primary: 80 40% 35%;
+    --sidebar-primary-foreground: 45 30% 96%;
     --sidebar-accent: 40 18% 86%;
     --sidebar-accent-foreground: 30 8% 45%;
     --sidebar-border: 35 15% 82%;
-    --sidebar-ring: 100 35% 42%;
+    --sidebar-ring: 80 40% 35%;
 
     --font-sans: 'Space Grotesk', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -60,7 +60,7 @@
     --popover: 0 0% 13%;
     --popover-foreground: 40 20% 90%;
 
-    --primary: 100 45% 50%;
+    --primary: 80 50% 50%;
     --primary-foreground: 0 0% 8%;
 
     --secondary: 0 0% 16%;
@@ -69,7 +69,7 @@
     --muted: 0 0% 18%;
     --muted-foreground: 40 5% 50%;
 
-    --accent: 100 45% 50%;
+    --accent: 80 50% 50%;
     --accent-foreground: 0 0% 8%;
 
     --destructive: 0 84% 60%;
@@ -77,16 +77,16 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 100 45% 50%;
+    --ring: 80 50% 50%;
 
     --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 40 5% 65%;
-    --sidebar-primary: 100 45% 50%;
+    --sidebar-primary: 80 50% 50%;
     --sidebar-primary-foreground: 0 0% 8%;
     --sidebar-accent: 0 0% 16%;
     --sidebar-accent-foreground: 40 5% 65%;
     --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 100 45% 50%;
+    --sidebar-ring: 80 50% 50%;
   }
 }
 
@@ -199,7 +199,7 @@
 
 /* Creative gradient text — cream green */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(100 35% 42%), hsl(120 30% 50%), hsl(100 35% 42%));
+  background: linear-gradient(135deg, hsl(80 40% 35%), hsl(90 35% 45%), hsl(80 40% 35%));
   background-size: 200% 200%;
   animation: gradient-shift 4s ease infinite;
   -webkit-background-clip: text;

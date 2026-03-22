@@ -1,7 +1,8 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X } from "lucide-react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X, Wrench } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
+import logoGamedev from "@/assets/logo-gamedev.png";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
@@ -106,14 +107,35 @@ const competences = [
   { name: "Python / Outils", level: 70 },
 ];
 
+const outils = [
+  { name: "Unreal Engine 5", category: "Moteur" },
+  { name: "Unity", category: "Moteur" },
+  { name: "Visual Studio", category: "IDE" },
+  { name: "Rider", category: "IDE" },
+  { name: "Blender", category: "3D" },
+  { name: "Substance Painter", category: "Textures" },
+  { name: "Perforce", category: "Versioning" },
+  { name: "Git", category: "Versioning" },
+  { name: "Jira", category: "Gestion" },
+  { name: "Photoshop", category: "2D" },
+  { name: "FMOD", category: "Audio" },
+  { name: "RenderDoc", category: "Debug" },
+];
+
 const certifications = [
   { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
   { title: "Advanced C++ Programming", org: "CppCon", year: "2023", image: projectGame2 },
   { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022", image: projectGame3 },
 ];
 
+const PROJECTS_PER_PAGE = 2;
+
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
+  const [proPage, setProPage] = useState(0);
+  const [persoPage, setPersoPage] = useState(0);
+  const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
+  const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
 
@@ -132,7 +154,7 @@ const Index = () => {
       {/* Nav */}
       <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
         <div className="flex items-center gap-3">
-          <div className="h-3 w-3 rounded-full bg-primary" />
+          <img src={logoGamedev} alt="GameDev Logo" className="h-8 w-8 rounded-full object-cover" />
           <span className="font-display text-lg font-extrabold text-foreground uppercase tracking-widest">GameDev</span>
         </div>
         <div className="flex items-center gap-8">
@@ -316,14 +338,24 @@ const Index = () => {
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
 
-
           <div className="mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono mb-6 uppercase tracking-wider">
-              <Trophy className="h-3.5 w-3.5" />
-              Projets professionnels
+            <div className="flex items-center justify-between mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono uppercase tracking-wider">
+                <Trophy className="h-3.5 w-3.5" />
+                Projets professionnels
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-muted-foreground">{proPage + 1}/{proMaxPage + 1}</span>
+                <button onClick={() => setProPage(Math.max(0, proPage - 1))} disabled={proPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => setProPage(Math.min(proMaxPage, proPage + 1))} disabled={proPage >= proMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {projetsPro.map((p, i) => (
+              {projetsPro.slice(proPage * PROJECTS_PER_PAGE, proPage * PROJECTS_PER_PAGE + PROJECTS_PER_PAGE).map((p, i) => (
                 <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -341,12 +373,23 @@ const Index = () => {
             </div>
           </div>
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono mb-6 uppercase tracking-wider">
-              <Code2 className="h-3.5 w-3.5" />
-              Projets personnels
+            <div className="flex items-center justify-between mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono uppercase tracking-wider">
+                <Code2 className="h-3.5 w-3.5" />
+                Projets personnels
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-muted-foreground">{persoPage + 1}/{persoMaxPage + 1}</span>
+                <button onClick={() => setPersoPage(Math.max(0, persoPage - 1))} disabled={persoPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => setPersoPage(Math.min(persoMaxPage, persoPage + 1))} disabled={persoPage >= persoMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {projetsPerso.map((p, i) => (
+              {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
                 <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -395,6 +438,22 @@ const Index = () => {
                 </div>
                 <h3 className="text-sm font-bold text-foreground mb-1.5 uppercase tracking-wide">{q.label}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{q.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── Mes Outils ── */}
+        <Section>
+          <SectionTitle icon={Wrench} label="Mes Outils" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {outils.map((o, i) => (
+              <div key={i} className="bg-card border border-border p-4 text-center hover:border-primary/30 transition-all group">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                  <Terminal className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xs font-bold text-foreground mb-0.5">{o.name}</h3>
+                <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-wider">{o.category}</span>
               </div>
             ))}
           </div>
