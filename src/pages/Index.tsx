@@ -157,12 +157,6 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Giant Typography */}
-        <div className="relative z-10 px-6 md:px-12">
-          <h1 className="font-display text-[12vw] md:text-[11vw] font-extrabold text-foreground/10 leading-[0.85] tracking-tight uppercase select-none">
-            Game<br />Dev
-          </h1>
-        </div>
 
         {/* Scattered collage rectangles over the text */}
         <div className="absolute left-[3%] top-[20%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
