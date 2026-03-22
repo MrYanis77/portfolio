@@ -107,6 +107,21 @@ const competences = [
   { name: "Python / Outils", level: 70 },
 ];
 
+const outils = [
+  { name: "Unreal Engine 5", category: "Moteur" },
+  { name: "Unity", category: "Moteur" },
+  { name: "Visual Studio", category: "IDE" },
+  { name: "Rider", category: "IDE" },
+  { name: "Blender", category: "3D" },
+  { name: "Substance Painter", category: "Textures" },
+  { name: "Perforce", category: "Versioning" },
+  { name: "Git", category: "Versioning" },
+  { name: "Jira", category: "Gestion" },
+  { name: "Photoshop", category: "2D" },
+  { name: "FMOD", category: "Audio" },
+  { name: "RenderDoc", category: "Debug" },
+];
+
 const certifications = [
   { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
   { title: "Advanced C++ Programming", org: "CppCon", year: "2023", image: projectGame2 },
