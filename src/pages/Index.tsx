@@ -133,7 +133,7 @@ const Index = () => {
       {/* Nav */}
       <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
         <div className="flex items-center gap-3">
-          <div className="h-3 w-3 rounded-full bg-primary" />
+          <img src={logoGamedev} alt="GameDev Logo" className="h-8 w-8 rounded-full object-cover" />
           <span className="font-display text-lg font-extrabold text-foreground uppercase tracking-widest">GameDev</span>
         </div>
         <div className="flex items-center gap-8">
