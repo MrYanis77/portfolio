@@ -432,6 +432,9 @@ const Index = () => {
                   <h3 className="text-sm font-bold text-foreground">{c.title}</h3>
                   <p className="text-sm text-muted-foreground font-mono">{c.org}</p>
                 </div>
+                <button onClick={() => setCertImage(c.image)} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 shrink-0" title="Voir le certificat">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </button>
                 <span className="font-mono text-xs text-primary/60 font-medium">{c.year}</span>
               </div>
             ))}
