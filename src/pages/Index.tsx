@@ -206,6 +206,21 @@ const Index = () => {
           </div>
         </div>
 
+        {/* ── Mes Outils ── */}
+        <Section>
+          <SectionTitle icon={Wrench} label="Mes Outils" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {outils.map((o, i) => (
+              <div key={i} className="bg-card border border-border p-4 text-center hover:border-primary/30 transition-all group">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                  <Terminal className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xs font-bold text-foreground mb-0.5">{o.name}</h3>
+                <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-wider">{o.category}</span>
+              </div>
+            ))}
+          </div>
+        </Section>
 
         <div className="absolute right-[20%] bottom-[18%] z-20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
           <div className="w-28 md:w-40 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-6deg)" }}>
