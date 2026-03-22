@@ -338,14 +338,24 @@ const Index = () => {
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
 
-
           <div className="mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono mb-6 uppercase tracking-wider">
-              <Trophy className="h-3.5 w-3.5" />
-              Projets professionnels
+            <div className="flex items-center justify-between mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono uppercase tracking-wider">
+                <Trophy className="h-3.5 w-3.5" />
+                Projets professionnels
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-muted-foreground">{proPage + 1}/{proMaxPage + 1}</span>
+                <button onClick={() => setProPage(Math.max(0, proPage - 1))} disabled={proPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => setProPage(Math.min(proMaxPage, proPage + 1))} disabled={proPage >= proMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {projetsPro.map((p, i) => (
+              {projetsPro.slice(proPage * PROJECTS_PER_PAGE, proPage * PROJECTS_PER_PAGE + PROJECTS_PER_PAGE).map((p, i) => (
                 <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -363,12 +373,23 @@ const Index = () => {
             </div>
           </div>
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono mb-6 uppercase tracking-wider">
-              <Code2 className="h-3.5 w-3.5" />
-              Projets personnels
+            <div className="flex items-center justify-between mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono uppercase tracking-wider">
+                <Code2 className="h-3.5 w-3.5" />
+                Projets personnels
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-muted-foreground">{persoPage + 1}/{persoMaxPage + 1}</span>
+                <button onClick={() => setPersoPage(Math.max(0, persoPage - 1))} disabled={persoPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => setPersoPage(Math.min(persoMaxPage, persoPage + 1))} disabled={persoPage >= persoMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {projetsPerso.map((p, i) => (
+              {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
                 <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
                   <div className="aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
