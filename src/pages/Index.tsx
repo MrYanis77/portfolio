@@ -128,8 +128,14 @@ const certifications = [
   { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022", image: projectGame3 },
 ];
 
+const PROJECTS_PER_PAGE = 2;
+
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
+  const [proPage, setProPage] = useState(0);
+  const [persoPage, setPersoPage] = useState(0);
+  const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
+  const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
 
