@@ -157,12 +157,6 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Giant Typography */}
-        <div className="relative z-10 px-6 md:px-12">
-          <h1 className="font-display text-[12vw] md:text-[11vw] font-extrabold text-foreground/10 leading-[0.85] tracking-tight uppercase select-none">
-            Game<br />Dev
-          </h1>
-        </div>
 
         {/* Scattered collage rectangles over the text */}
         <div className="absolute left-[3%] top-[20%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
@@ -177,11 +171,6 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="absolute left-[28%] bottom-[5%] z-20 animate-fade-up" style={{ animationDelay: "0.5s" }}>
-          <div className="w-44 md:w-60 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(3deg)" }}>
-            <img src={projectGame1} alt="Void Station" className="w-full h-auto aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" />
-          </div>
-        </div>
 
         <div className="absolute right-[20%] bottom-[18%] z-20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
           <div className="w-28 md:w-40 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-6deg)" }}>
