@@ -1,5 +1,5 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
 import thumb1 from "@/assets/thumb-1.jpg";
