@@ -1,7 +1,8 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X } from "lucide-react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X, Wrench } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
+import logoGamedev from "@/assets/logo-gamedev.png";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
