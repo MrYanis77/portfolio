@@ -1,5 +1,5 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, Sparkles, ArrowDown, FileDown, ExternalLink, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
 import thumb1 from "@/assets/thumb-1.jpg";
@@ -107,14 +107,27 @@ const competences = [
 ];
 
 const certifications = [
-  { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024" },
-  { title: "Advanced C++ Programming", org: "CppCon", year: "2023" },
-  { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022" },
+  { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
+  { title: "Advanced C++ Programming", org: "CppCon", year: "2023", image: projectGame2 },
+  { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022", image: projectGame3 },
 ];
 
 const Index = () => {
+  const [certImage, setCertImage] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
+
+      {/* Certification lightbox */}
+      {certImage && (
+        <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6" onClick={() => setCertImage(null)}>
+          <div className="relative max-w-2xl w-full animate-scale-in" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setCertImage(null)} className="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
+              <X className="h-4 w-4" />
+            </button>
+            <img src={certImage} alt="Certification" className="w-full h-auto rounded-sm border border-border" />
+          </div>
+        </div>
+      )}
 
       {/* Nav */}
       <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
@@ -419,6 +432,9 @@ const Index = () => {
                   <h3 className="text-sm font-bold text-foreground">{c.title}</h3>
                   <p className="text-sm text-muted-foreground font-mono">{c.org}</p>
                 </div>
+                <button onClick={() => setCertImage(c.image)} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 shrink-0" title="Voir le certificat">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </button>
                 <span className="font-mono text-xs text-primary/60 font-medium">{c.year}</span>
               </div>
             ))}
