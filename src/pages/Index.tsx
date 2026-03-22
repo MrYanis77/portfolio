@@ -157,6 +157,19 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Center — Name + Formation + Objectif */}
+        <div className="relative z-30 text-center px-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight leading-none">
+            Prénom Nom
+          </h1>
+          <p className="font-mono text-sm md:text-base text-muted-foreground uppercase tracking-[0.25em] mt-4">
+            Développeur Jeux Vidéo — Unreal / Unity
+          </p>
+          <p className="text-xs md:text-sm text-muted-foreground/70 mt-2 max-w-md mx-auto leading-relaxed">
+            En recherche d'un poste de Game Developer pour créer des expériences immersives et innovantes.
+          </p>
+        </div>
+
 
         {/* Scattered collage rectangles over the text */}
         <div className="absolute left-[3%] top-[20%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
