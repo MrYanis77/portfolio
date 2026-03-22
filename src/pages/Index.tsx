@@ -107,9 +107,9 @@ const competences = [
 ];
 
 const certifications = [
-  { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024" },
-  { title: "Advanced C++ Programming", org: "CppCon", year: "2023" },
-  { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022" },
+  { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
+  { title: "Advanced C++ Programming", org: "CppCon", year: "2023", image: projectGame2 },
+  { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022", image: projectGame3 },
 ];
 
 const Index = () => {
