@@ -199,7 +199,7 @@
 
 /* Creative gradient text — cream green */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(100 35% 42%), hsl(120 30% 50%), hsl(100 35% 42%));
+  background: linear-gradient(135deg, hsl(80 40% 35%), hsl(90 35% 45%), hsl(80 40% 35%));
   background-size: 200% 200%;
   animation: gradient-shift 4s ease infinite;
   -webkit-background-clip: text;
