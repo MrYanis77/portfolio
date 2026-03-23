@@ -105,14 +105,14 @@ const qualites = [
 ];
 
 const competences = [
-  { name: "C / C++", level: 95 },
-  { name: "Unreal Engine", level: 90 },
-  { name: "C# / Unity", level: 85 },
-  { name: "OpenGL / Vulkan", level: 75 },
-  { name: "Réseau / Netcode", level: 80 },
-  { name: "Physique / Maths 3D", level: 85 },
-  { name: "Git / Perforce", level: 90 },
-  { name: "Python / Outils", level: 70 },
+  { name: "C / C++", logo: logoCpp },
+  { name: "UNREAL ENGINE", logo: logoUnreal },
+  { name: "C# / UNITY", logo: logoUnity },
+  { name: "OPENGL / VULKAN", logo: logoOpengl },
+  { name: "RÉSEAU / NETCODE", logo: logoNetwork },
+  { name: "MATHS 3D", logo: logoMath3d },
+  { name: "GIT / PERFORCE", logo: logoGit },
+  { name: "PYTHON", logo: logoPython },
 ];
 
 const outils = [
