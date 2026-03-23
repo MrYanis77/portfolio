@@ -104,31 +104,46 @@ const qualites = [
   { icon: Shield, label: "Résilience", desc: "Deadlines serrées, crunch maîtrisé, adaptation rapide" },
 ];
 
-const competences = [
-  { name: "C / C++", logo: logoCpp },
-  { name: "UNREAL ENGINE", logo: logoUnreal },
-  { name: "C# / UNITY", logo: logoUnity },
-  { name: "OPENGL / VULKAN", logo: logoOpengl },
-  { name: "RÉSEAU / NETCODE", logo: logoNetwork },
-  { name: "MATHS 3D", logo: logoMath3d },
-  { name: "GIT / PERFORCE", logo: logoGit },
-  { name: "PYTHON", logo: logoPython },
-];
+const competences = {
+  "Front-end": [
+    { name: "C# / UNITY", logo: logoUnity },
+    { name: "OPENGL / VULKAN", logo: logoOpengl },
+    { name: "MATHS 3D", logo: logoMath3d },
+  ],
+  "Back-end": [
+    { name: "C / C++", logo: logoCpp },
+    { name: "UNREAL ENGINE", logo: logoUnreal },
+    { name: "RÉSEAU / NETCODE", logo: logoNetwork },
+    { name: "PYTHON", logo: logoPython },
+    { name: "GIT / PERFORCE", logo: logoGit },
+  ],
+  "UX / UI": [
+    { name: "OPENGL / VULKAN", logo: logoOpengl },
+    { name: "MATHS 3D", logo: logoMath3d },
+  ],
+};
 
-const outils = [
-  { name: "Unreal Engine 5", category: "Moteur" },
-  { name: "Unity", category: "Moteur" },
-  { name: "Visual Studio", category: "IDE" },
-  { name: "Rider", category: "IDE" },
-  { name: "Blender", category: "3D" },
-  { name: "Substance Painter", category: "Textures" },
-  { name: "Perforce", category: "Versioning" },
-  { name: "Git", category: "Versioning" },
-  { name: "Jira", category: "Gestion" },
-  { name: "Photoshop", category: "2D" },
-  { name: "FMOD", category: "Audio" },
-  { name: "RenderDoc", category: "Debug" },
-];
+const outils = {
+  "Front-end": [
+    { name: "Unity", category: "Moteur" },
+    { name: "Blender", category: "3D" },
+    { name: "Substance Painter", category: "Textures" },
+    { name: "FMOD", category: "Audio" },
+  ],
+  "Back-end": [
+    { name: "Unreal Engine 5", category: "Moteur" },
+    { name: "Visual Studio", category: "IDE" },
+    { name: "Rider", category: "IDE" },
+    { name: "RenderDoc", category: "Debug" },
+    { name: "Perforce", category: "Versioning" },
+    { name: "Git", category: "Versioning" },
+  ],
+  "UX / UI": [
+    { name: "Photoshop", category: "2D" },
+    { name: "Blender", category: "3D" },
+    { name: "Jira", category: "Gestion" },
+  ],
+};
 
 const certifications = [
   { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
