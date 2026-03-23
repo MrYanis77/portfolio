@@ -104,31 +104,46 @@ const qualites = [
   { icon: Shield, label: "Résilience", desc: "Deadlines serrées, crunch maîtrisé, adaptation rapide" },
 ];
 
-const competences = [
-  { name: "C / C++", logo: logoCpp },
-  { name: "UNREAL ENGINE", logo: logoUnreal },
-  { name: "C# / UNITY", logo: logoUnity },
-  { name: "OPENGL / VULKAN", logo: logoOpengl },
-  { name: "RÉSEAU / NETCODE", logo: logoNetwork },
-  { name: "MATHS 3D", logo: logoMath3d },
-  { name: "GIT / PERFORCE", logo: logoGit },
-  { name: "PYTHON", logo: logoPython },
-];
+const competences = {
+  "Front-end": [
+    { name: "C# / UNITY", logo: logoUnity },
+    { name: "OPENGL / VULKAN", logo: logoOpengl },
+    { name: "MATHS 3D", logo: logoMath3d },
+  ],
+  "Back-end": [
+    { name: "C / C++", logo: logoCpp },
+    { name: "UNREAL ENGINE", logo: logoUnreal },
+    { name: "RÉSEAU / NETCODE", logo: logoNetwork },
+    { name: "PYTHON", logo: logoPython },
+    { name: "GIT / PERFORCE", logo: logoGit },
+  ],
+  "UX / UI": [
+    { name: "OPENGL / VULKAN", logo: logoOpengl },
+    { name: "MATHS 3D", logo: logoMath3d },
+  ],
+};
 
-const outils = [
-  { name: "Unreal Engine 5", category: "Moteur" },
-  { name: "Unity", category: "Moteur" },
-  { name: "Visual Studio", category: "IDE" },
-  { name: "Rider", category: "IDE" },
-  { name: "Blender", category: "3D" },
-  { name: "Substance Painter", category: "Textures" },
-  { name: "Perforce", category: "Versioning" },
-  { name: "Git", category: "Versioning" },
-  { name: "Jira", category: "Gestion" },
-  { name: "Photoshop", category: "2D" },
-  { name: "FMOD", category: "Audio" },
-  { name: "RenderDoc", category: "Debug" },
-];
+const outils = {
+  "Front-end": [
+    { name: "Unity", category: "Moteur" },
+    { name: "Blender", category: "3D" },
+    { name: "Substance Painter", category: "Textures" },
+    { name: "FMOD", category: "Audio" },
+  ],
+  "Back-end": [
+    { name: "Unreal Engine 5", category: "Moteur" },
+    { name: "Visual Studio", category: "IDE" },
+    { name: "Rider", category: "IDE" },
+    { name: "RenderDoc", category: "Debug" },
+    { name: "Perforce", category: "Versioning" },
+    { name: "Git", category: "Versioning" },
+  ],
+  "UX / UI": [
+    { name: "Photoshop", category: "2D" },
+    { name: "Blender", category: "3D" },
+    { name: "Jira", category: "Gestion" },
+  ],
+};
 
 const certifications = [
   { title: "Unreal Engine 5 Certified Developer", org: "Epic Games", year: "2024", image: projectGame1 },
@@ -142,6 +157,8 @@ const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
+  const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
+  const [compTab, setCompTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
   const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
   return (
@@ -454,8 +471,15 @@ const Index = () => {
         {/* ── Mes Outils ── */}
         <Section>
           <SectionTitle icon={Wrench} label="Mes Outils" />
+          <div className="flex gap-2 mb-6">
+            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
+              <button key={tab} onClick={() => setOutilsTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${outilsTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
+                {tab}
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {outils.map((o, i) => (
+            {outils[outilsTab].map((o, i) => (
               <div key={i} className="bg-card border border-border p-4 text-center hover:border-primary/30 transition-all group">
                 <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                   <Terminal className="h-5 w-5 text-primary" />
@@ -470,8 +494,15 @@ const Index = () => {
         {/* ── Compétences ── */}
         <Section id="competences">
           <SectionTitle icon={Terminal} label="Compétences" />
+          <div className="flex gap-2 mb-6">
+            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
+              <button key={tab} onClick={() => setCompTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${compTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
+                {tab}
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {competences.map((c, i) => (
+            {competences[compTab].map((c, i) => (
               <div
                 key={i}
                 className="flex flex-col items-center justify-center gap-3 bg-card border border-border rounded-xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
