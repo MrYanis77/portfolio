@@ -494,8 +494,15 @@ const Index = () => {
         {/* ── Compétences ── */}
         <Section id="competences">
           <SectionTitle icon={Terminal} label="Compétences" />
+          <div className="flex gap-2 mb-6">
+            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
+              <button key={tab} onClick={() => setCompTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${compTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
+                {tab}
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {competences.map((c, i) => (
+            {competences[compTab].map((c, i) => (
               <div
                 key={i}
                 className="flex flex-col items-center justify-center gap-3 bg-card border border-border rounded-xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
