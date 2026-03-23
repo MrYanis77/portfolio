@@ -470,19 +470,16 @@ const Index = () => {
         {/* ── Compétences ── */}
         <Section id="competences">
           <SectionTitle icon={Terminal} label="Compétences" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {competences.map((c, i) => (
-              <div key={i} className="group">
-                <div className="flex justify-between mb-2">
-                  <span className="font-mono text-sm text-foreground font-medium">{c.name}</span>
-                  <span className="font-mono text-xs text-primary font-bold">{c.level}%</span>
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center gap-3 bg-card border border-border rounded-xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
+              >
+                <div className="h-16 w-16 flex items-center justify-center">
+                  <img src={c.logo} alt={c.name} loading="lazy" width={64} height={64} className="object-contain group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <div className="h-1.5 bg-secondary overflow-hidden">
-                  <div
-                    className="h-full bg-primary transition-all duration-700"
-                    style={{ width: `${c.level}%` }}
-                  />
-                </div>
+                <span className="font-mono text-xs text-foreground font-bold tracking-wider text-center uppercase">{c.name}</span>
               </div>
             ))}
           </div>
