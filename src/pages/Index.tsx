@@ -3,6 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
 import logoGamedev from "@/assets/logo-gamedev.png";
+import logoCpp from "@/assets/logo-cpp.png";
+import logoUnreal from "@/assets/logo-unreal.png";
+import logoUnity from "@/assets/logo-unity.png";
+import logoOpengl from "@/assets/logo-opengl.png";
+import logoNetwork from "@/assets/logo-network.png";
+import logoMath3d from "@/assets/logo-math3d.png";
+import logoGit from "@/assets/logo-git.png";
+import logoPython from "@/assets/logo-python.png";
 import thumb1 from "@/assets/thumb-1.jpg";
 import thumb2 from "@/assets/thumb-2.jpg";
 import thumb3 from "@/assets/thumb-3.jpg";
@@ -97,14 +105,14 @@ const qualites = [
 ];
 
 const competences = [
-  { name: "C / C++", level: 95 },
-  { name: "Unreal Engine", level: 90 },
-  { name: "C# / Unity", level: 85 },
-  { name: "OpenGL / Vulkan", level: 75 },
-  { name: "Réseau / Netcode", level: 80 },
-  { name: "Physique / Maths 3D", level: 85 },
-  { name: "Git / Perforce", level: 90 },
-  { name: "Python / Outils", level: 70 },
+  { name: "C / C++", logo: logoCpp },
+  { name: "UNREAL ENGINE", logo: logoUnreal },
+  { name: "C# / UNITY", logo: logoUnity },
+  { name: "OPENGL / VULKAN", logo: logoOpengl },
+  { name: "RÉSEAU / NETCODE", logo: logoNetwork },
+  { name: "MATHS 3D", logo: logoMath3d },
+  { name: "GIT / PERFORCE", logo: logoGit },
+  { name: "PYTHON", logo: logoPython },
 ];
 
 const outils = [
@@ -462,19 +470,16 @@ const Index = () => {
         {/* ── Compétences ── */}
         <Section id="competences">
           <SectionTitle icon={Terminal} label="Compétences" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {competences.map((c, i) => (
-              <div key={i} className="group">
-                <div className="flex justify-between mb-2">
-                  <span className="font-mono text-sm text-foreground font-medium">{c.name}</span>
-                  <span className="font-mono text-xs text-primary font-bold">{c.level}%</span>
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center gap-3 bg-card border border-border rounded-xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
+              >
+                <div className="h-16 w-16 flex items-center justify-center">
+                  <img src={c.logo} alt={c.name} loading="lazy" width={64} height={64} className="object-contain group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <div className="h-1.5 bg-secondary overflow-hidden">
-                  <div
-                    className="h-full bg-primary transition-all duration-700"
-                    style={{ width: `${c.level}%` }}
-                  />
-                </div>
+                <span className="font-mono text-xs text-foreground font-bold tracking-wider text-center uppercase">{c.name}</span>
               </div>
             ))}
           </div>
