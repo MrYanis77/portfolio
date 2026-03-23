@@ -157,6 +157,8 @@ const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
+  const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
+  const [compTab, setCompTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
   const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
   return (
