@@ -471,8 +471,15 @@ const Index = () => {
         {/* ── Mes Outils ── */}
         <Section>
           <SectionTitle icon={Wrench} label="Mes Outils" />
+          <div className="flex gap-2 mb-6">
+            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
+              <button key={tab} onClick={() => setOutilsTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${outilsTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
+                {tab}
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {outils.map((o, i) => (
+            {outils[outilsTab].map((o, i) => (
               <div key={i} className="bg-card border border-border p-4 text-center hover:border-primary/30 transition-all group">
                 <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                   <Terminal className="h-5 w-5 text-primary" />
