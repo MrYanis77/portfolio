@@ -197,6 +197,8 @@ const Index = () => {
 
       {/* ═══ HERO — Massive typography + scattered collage ═══ */}
       <main className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
+        {/* Carousel as background */}
+        <ProjectCarousel fullscreen />
         {/* Subtitle top-left */}
         <div className="absolute top-8 left-8 md:left-12 z-20 animate-fade-up">
           <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] leading-relaxed">
