@@ -14,7 +14,7 @@ const projects = [
   { image: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
 ];
 
-const ProjectCarousel = () => {
+const ProjectCarousel = ({ fullscreen = false }: { fullscreen?: boolean }) => {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
