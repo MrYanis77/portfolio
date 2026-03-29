@@ -197,6 +197,8 @@ const Index = () => {
 
       {/* ═══ HERO — Massive typography + scattered collage ═══ */}
       <main className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
+        {/* Carousel as background */}
+        <ProjectCarousel fullscreen />
         {/* Subtitle top-left */}
         <div className="absolute top-8 left-8 md:left-12 z-20 animate-fade-up">
           <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] leading-relaxed">
@@ -278,42 +280,6 @@ const Index = () => {
         </div>
       </main>
 
-      {/* ═══ Carousel section below hero ═══ */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-10 items-start">
-          <div className="animate-fade-up">
-            <p className="font-mono text-[10px] text-primary uppercase tracking-[0.2em] mb-3">Featured Projects</p>
-            <h2 className="font-display text-3xl font-extrabold text-foreground uppercase leading-tight">
-              Mes<br />créations
-            </h2>
-            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Game programmer spécialisé en gameplay systems, moteurs physiques et architecture réseau.
-            </p>
-          </div>
-          <div className="animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
-            <ProjectCarousel />
-          </div>
-        </div>
-        {/* Collage thumbnails */}
-        <div className="flex gap-4 mt-10 justify-center">
-          {[
-            { src: thumb1, label: "Gameplay Systems", rotate: "-2deg" },
-            { src: thumb2, label: "Character Tech", rotate: "1.5deg" },
-            { src: thumb3, label: "Physics Engine", rotate: "-1deg" },
-            { src: thumb4, label: "3D Modeling", rotate: "2deg" },
-            { src: thumb5, label: "VFX Particles", rotate: "-1.5deg" },
-          ].map((t) => (
-            <div key={t.label} className="relative group cursor-pointer w-28 collage-frame" style={{ transform: `rotate(${t.rotate})` }}>
-              <div className="overflow-hidden torn-edge">
-                <img src={t.src} alt={t.label} className="w-full h-20 object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-              </div>
-              <div className="mt-2">
-                <span className="font-mono text-[8px] text-muted-foreground uppercase tracking-wider">{t.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* ════════════════════ SECTIONS ════════════════════ */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24 space-y-28 relative z-10">
