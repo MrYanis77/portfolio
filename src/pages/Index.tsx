@@ -323,73 +323,97 @@ const Index = () => {
         {/* ── Projets ── */}
         <Section id="projets">
           <SectionTitle icon={Gamepad2} label="Projets" />
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Left — Project list (40%) */}
+            <div className="w-full lg:w-[40%] space-y-3">
+              {allProjets.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setSelectedProject(i); setCarouselIndex(0); }}
+                  className={`w-full text-left p-4 border transition-all group ${
+                    i === selectedProject
+                      ? 'bg-primary/10 border-primary/40'
+                      : 'bg-card border-border hover:border-primary/20'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`text-[9px] px-1.5 py-0.5 font-mono uppercase tracking-wider ${
+                          p.category === 'pro' ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {p.category === 'pro' ? 'Pro' : 'Perso'}
+                        </span>
+                        <h3 className={`text-sm font-bold ${i === selectedProject ? 'text-primary' : 'text-foreground group-hover:text-primary'} transition-colors`}>{p.title}</h3>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-1">{p.desc}</p>
+                    </div>
+                    <ChevronRight className={`h-4 w-4 shrink-0 transition-all ${i === selectedProject ? 'text-primary translate-x-0.5' : 'text-muted-foreground'}`} />
+                  </div>
+                </button>
+              ))}
+            </div>
 
-          <div className="mb-10">
-            <div className="flex items-center justify-between mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono uppercase tracking-wider">
-                <Trophy className="h-3.5 w-3.5" />
-                Projets professionnels
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-muted-foreground">{proPage + 1}/{proMaxPage + 1}</span>
-                <button onClick={() => setProPage(Math.max(0, proPage - 1))} disabled={proPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => setProPage(Math.min(proMaxPage, proPage + 1))} disabled={proPage >= proMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {projetsPro.slice(proPage * PROJECTS_PER_PAGE, proPage * PROJECTS_PER_PAGE + PROJECTS_PER_PAGE).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
-                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+            {/* Right — Image carousel + details (60%) */}
+            <div className="w-full lg:w-[60%]">
+              <div className="bg-card border border-border overflow-hidden">
+                {/* Image carousel */}
+                <div className="relative aspect-video overflow-hidden">
+                  {currentProject.images.map((img, i) => (
+                    <div
+                      key={i}
+                      className="absolute inset-0 transition-all duration-500"
+                      style={{
+                        opacity: i === carouselIndex ? 1 : 0,
+                        transform: i === carouselIndex ? 'scale(1)' : 'scale(1.05)',
+                      }}
+                    >
+                      <img src={img} alt={`${currentProject.title} - ${i + 1}`} className="h-full w-full object-cover" />
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                    <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                  ))}
+                  {/* Navigation arrows */}
+                  <button
+                    onClick={() => setCarouselIndex((carouselIndex - 1 + totalImages) % totalImages)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setCarouselIndex((carouselIndex + 1) % totalImages)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                  {/* Dots */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    {currentProject.images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCarouselIndex(i)}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${i === carouselIndex ? 'w-6 bg-primary' : 'w-1.5 bg-background/60 hover:bg-background'}`}
+                      />
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono uppercase tracking-wider">
-                <Code2 className="h-3.5 w-3.5" />
-                Projets personnels
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-muted-foreground">{persoPage + 1}/{persoMaxPage + 1}</span>
-                <button onClick={() => setPersoPage(Math.max(0, persoPage - 1))} disabled={persoPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => setPersoPage(Math.min(persoMaxPage, persoPage + 1))} disabled={persoPage >= persoMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
-                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
+                {/* Project info + download */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-foreground">{currentProject.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">{currentProject.desc}</p>
+                      <span className="font-mono text-xs text-primary/70 font-medium mt-2 inline-block">{currentProject.tech}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                    <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                    <a
+                      href={currentProject.doc}
+                      download
+                      className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground text-xs font-mono font-bold uppercase tracking-wider hover:brightness-110 transition-all active:scale-95 shrink-0"
+                    >
+                      <FileDown className="h-4 w-4" />
+                      Document
+                    </a>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </Section>
