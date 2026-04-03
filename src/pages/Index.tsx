@@ -148,16 +148,14 @@ const certifications = [
   { title: "Unity Certified Programmer", org: "Unity Technologies", year: "2022", image: projectGame3 },
 ];
 
-const PROJECTS_PER_PAGE = 2;
-
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
-  const [proPage, setProPage] = useState(0);
-  const [persoPage, setPersoPage] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const [compTab, setCompTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
-  const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
-  const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
+  const currentProject = allProjets[selectedProject];
+  const totalImages = currentProject.images.length;
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
 
