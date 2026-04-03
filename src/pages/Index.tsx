@@ -79,15 +79,12 @@ const experiences = [
   { role: "Engine Programmer", company: "PixelWave Games", period: "2021 – 2023", desc: "Optimisation rendu mobile, système de particules custom, profiling mémoire.", tags: ["C++", "OpenGL ES", "Metal"] },
 ];
 
-const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1 },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2 },
-];
-
-const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3 },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4 },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5 },
+const allProjets = [
+  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", category: "pro", images: [projectGame1, projectGame2, projectGame3], doc: "/docs/echoes-of-valheim.pdf" },
+  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", category: "pro", images: [projectGame2, projectGame4, projectGame5], doc: "/docs/shadow-protocol.pdf" },
+  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", category: "perso", images: [projectGame3, projectGame1, projectGame5], doc: "/docs/pixel-physics.pdf" },
+  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", category: "perso", images: [projectGame4, projectGame2, projectGame3], doc: "/docs/dungeon-generator.pdf" },
+  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", category: "perso", images: [projectGame5, projectGame1, projectGame4], doc: "/docs/shader-lab.pdf" },
 ];
 
 const formations = [
