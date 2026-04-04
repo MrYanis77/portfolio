@@ -177,6 +177,33 @@ const Index = () => {
         </div>
       )}
 
+      {/* Project lightbox with manual navigation */}
+      {projectLightbox && (
+        <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
+          <div className="relative max-w-3xl w-full animate-scale-in" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setProjectLightbox(null)} className="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
+              <X className="h-4 w-4" />
+            </button>
+            <p className="text-center font-mono text-xs text-primary mb-3 uppercase tracking-wider">{projectLightbox.title}</p>
+            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-sm border border-border" />
+            <div className="flex items-center justify-between mt-4">
+              <button
+                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length })}
+                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <span className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</span>
+              <button
+                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length })}
+                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Nav */}
       <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
         <div className="flex items-center gap-3">
