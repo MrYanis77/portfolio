@@ -180,28 +180,31 @@ const Index = () => {
       {/* Project lightbox with manual navigation */}
       {projectLightbox && (
         <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
-          <div className="relative max-w-3xl w-full animate-scale-in" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setProjectLightbox(null)} className="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
+          {/* Left arrow — on the side */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length }); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 z-10"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          {/* Content */}
+          <div className="relative max-w-3xl w-full animate-scale-in mx-16" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setProjectLightbox(null)} className="absolute top-2 right-2 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
               <X className="h-4 w-4" />
             </button>
             <p className="text-center font-mono text-xs text-primary mb-3 uppercase tracking-wider">{projectLightbox.title}</p>
             <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-sm border border-border" />
-            <div className="flex items-center justify-between mt-4">
-              <button
-                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length })}
-                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <span className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</span>
-              <button
-                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length })}
-                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+            <p className="text-center font-mono text-xs text-muted-foreground mt-3">{projectLightbox.index + 1} / {projectLightbox.images.length}</p>
           </div>
+
+          {/* Right arrow — on the side */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length }); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 z-10"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       )}
       {/* Nav */}
