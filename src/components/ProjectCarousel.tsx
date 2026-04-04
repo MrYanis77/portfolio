@@ -14,7 +14,7 @@ const projects = [
   { image: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
 ];
 
-const ProjectCarousel = ({ fullscreen = false }: { fullscreen?: boolean }) => {
+const ProjectCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -32,54 +32,6 @@ const ProjectCarousel = ({ fullscreen = false }: { fullscreen?: boolean }) => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
   }, [next]);
-
-  if (fullscreen) {
-    return (
-      <div className="absolute inset-0 z-0">
-        {projects.map((project, i) => (
-          <div
-            key={i}
-            className="absolute inset-0"
-            style={{
-              opacity: i === current ? 1 : 0,
-              transform: i === current ? "scale(1)" : "scale(1.08)",
-              transition: "opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 6s cubic-bezier(0.16,1,0.3,1)",
-            }}
-          >
-            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
-        {/* Bottom info bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between px-8 py-4">
-          <div className="flex items-center gap-4">
-            <button onClick={prev} className="h-8 w-8 rounded-full bg-background/40 backdrop-blur-sm border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90">
-              <ChevronLeft className="h-3.5 w-3.5" />
-            </button>
-            <div>
-              <h3 className="text-xs font-bold text-foreground">{projects[current].title}</h3>
-              <p className="text-[10px] text-muted-foreground">{projects[current].category} — {projects[current].tech}</p>
-            </div>
-            <button onClick={next} className="h-8 w-8 rounded-full bg-background/40 backdrop-blur-sm border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90">
-              <ChevronRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
-          <div className="flex gap-1.5 items-center">
-            <span className="font-mono text-[10px] text-muted-foreground mr-2">
-              {String(current + 1).padStart(2, "0")}/{String(projects.length).padStart(2, "0")}
-            </span>
-            {projects.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                className={`h-1 rounded-full transition-all duration-300 ${i === current ? 'w-6 bg-primary' : 'w-1.5 bg-border/60 hover:bg-muted-foreground'}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full">
