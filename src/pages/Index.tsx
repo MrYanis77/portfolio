@@ -223,125 +223,62 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* ═══ HERO — Massive typography + scattered collage ═══ */}
-      <main className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
-        {/* Subtitle top-left */}
-        <div className="absolute top-8 left-8 md:left-12 z-20 animate-fade-up">
-          <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] leading-relaxed">
-            Your journey begins<br />where code becomes real
-          </p>
-        </div>
+      {/* ═══ HERO — 40/60 split: Présentation | Carrousel ═══ */}
+      <main className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-12 lg:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-14 items-center min-h-[75vh]">
 
-        {/* Center — Name + Formation + Objectif */}
-        <div className="relative z-30 text-center px-4 animate-fade-up" style={{ animationDelay: "0.15s" }}>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight leading-none">
-            Prénom Nom
-          </h1>
-          <p className="font-mono text-sm md:text-base text-muted-foreground uppercase tracking-[0.25em] mt-4">
-            Développeur Jeux Vidéo — Unreal / Unity
-          </p>
-          <p className="text-xs md:text-sm text-muted-foreground/70 mt-2 max-w-md mx-auto leading-relaxed">
-            En recherche d'un poste de Game Developer pour créer des expériences immersives et innovantes.
-          </p>
-        </div>
+          {/* LEFT — Présentation (40%) */}
+          <div className="flex flex-col gap-8 animate-fade-up">
+            <div>
+              <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-4">
+                Portfolio — Game Developer
+              </p>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tight leading-none">
+                Prénom Nom
+              </h1>
+              <p className="font-mono text-sm text-muted-foreground uppercase tracking-[0.2em] mt-3">
+                Développeur Jeux Vidéo — Unreal / Unity
+              </p>
+              <p className="text-sm text-muted-foreground/70 mt-3 leading-relaxed max-w-sm">
+                En recherche d'un poste de Game Developer pour créer des expériences immersives et innovantes.
+              </p>
+            </div>
 
+            <div className="flex flex-wrap gap-2">
+              {["C++", "C#", "Unreal", "Unity", "OpenGL"].map((t) => (
+                <span key={t} className="text-[9px] px-2.5 py-1 border border-border text-muted-foreground font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-colors cursor-default">{t}</span>
+              ))}
+            </div>
 
-        {/* Scattered collage rectangles over the text */}
-        <div className="absolute left-[3%] top-[20%] z-20 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <div className="w-36 md:w-48 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-8deg)" }}>
-            <img src={projectGame5} alt="Dungeon RPG" className="w-full h-auto aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-500" />
-          </div>
-        </div>
-
-        <div className="absolute right-[5%] top-[8%] z-20 animate-fade-up" style={{ animationDelay: "0.35s" }}>
-          <div className="w-40 md:w-56 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(5deg)" }}>
-            <img src={projectGame4} alt="Neon Command" className="w-full h-auto aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-          </div>
-        </div>
-
-
-        <div className="absolute right-[20%] bottom-[18%] z-20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-          <div className="w-28 md:w-40 overflow-hidden collage-frame group cursor-pointer" style={{ transform: "rotate(-6deg)" }}>
-            <img src={thumb4} alt="3D Modeling" className="w-full h-auto aspect-[3/2] object-cover group-hover:scale-110 transition-transform duration-500" />
-          </div>
-        </div>
-
-        {/* Spinning scroll indicator — bottom right */}
-        <div className="absolute bottom-8 right-8 md:right-12 z-20 animate-fade-up" style={{ animationDelay: "0.6s" }}>
-          <a href="#parcours" className="relative w-20 h-20 flex items-center justify-center group">
-            <svg className="absolute inset-0 w-full h-full animate-[spin_8s_linear_infinite]" viewBox="0 0 100 100">
-              <defs>
-                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-              </defs>
-              <text className="fill-muted-foreground" style={{ fontSize: "10.5px", fontFamily: "var(--font-mono)", letterSpacing: "3px" }}>
-                <textPath href="#circlePath">SCROLL TO EXPLORE • SCROLL TO EXPLORE •</textPath>
-              </text>
-            </svg>
-            <ArrowDown className="h-4 w-4 text-primary group-hover:translate-y-1 transition-transform" />
-          </a>
-        </div>
-
-        {/* Bio overlay — bottom left */}
-        <div className="absolute bottom-8 left-8 md:left-12 z-20 max-w-xs animate-fade-up" style={{ animationDelay: "0.3s" }}>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {["C++", "C#", "Unreal", "Unity", "OpenGL"].map((t) => (
-              <span key={t} className="text-[9px] px-2.5 py-1 border border-border text-muted-foreground font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-colors cursor-default">{t}</span>
-            ))}
-          </div>
-          <div className="flex gap-3 items-center">
-            {[
-              { Icon: Github, label: "GitHub" },
-              { Icon: Linkedin, label: "LinkedIn" },
-              { Icon: Mail, label: "Email" },
-            ].map(({ Icon, label }) => (
-              <a key={label} href="#" className="h-9 w-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90">
-                <Icon className="h-3.5 w-3.5" />
+            <div className="flex gap-3 items-center flex-wrap">
+              {[
+                { Icon: Github, label: "GitHub" },
+                { Icon: Linkedin, label: "LinkedIn" },
+                { Icon: Mail, label: "Email" },
+              ].map(({ Icon, label }) => (
+                <a key={label} href="#" className="h-9 w-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90">
+                  <Icon className="h-3.5 w-3.5" />
+                </a>
+              ))}
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" download className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-mono font-bold uppercase tracking-wider hover:brightness-110 transition-all active:scale-95">
+                <FileDown className="h-3.5 w-3.5" />
+                CV PDF
               </a>
-            ))}
-            <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" download className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-mono font-bold uppercase tracking-wider hover:brightness-110 transition-all active:scale-95">
-              <FileDown className="h-3.5 w-3.5" />
-              CV PDF
+            </div>
+
+            <a href="#parcours" className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider group mt-2">
+              <ArrowDown className="h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
+              Scroll to explore
             </a>
           </div>
-        </div>
-      </main>
 
-      {/* ═══ Carousel section below hero ═══ */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-10 items-start">
-          <div className="animate-fade-up">
-            <p className="font-mono text-[10px] text-primary uppercase tracking-[0.2em] mb-3">Featured Projects</p>
-            <h2 className="font-display text-3xl font-extrabold text-foreground uppercase leading-tight">
-              Mes<br />créations
-            </h2>
-            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Game programmer spécialisé en gameplay systems, moteurs physiques et architecture réseau.
-            </p>
-          </div>
+          {/* RIGHT — Carrousel (60%) */}
           <div className="animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
             <ProjectCarousel />
           </div>
+
         </div>
-        {/* Collage thumbnails */}
-        <div className="flex gap-4 mt-10 justify-center">
-          {[
-            { src: thumb1, label: "Gameplay Systems", rotate: "-2deg" },
-            { src: thumb2, label: "Character Tech", rotate: "1.5deg" },
-            { src: thumb3, label: "Physics Engine", rotate: "-1deg" },
-            { src: thumb4, label: "3D Modeling", rotate: "2deg" },
-            { src: thumb5, label: "VFX Particles", rotate: "-1.5deg" },
-          ].map((t) => (
-            <div key={t.label} className="relative group cursor-pointer w-28 collage-frame" style={{ transform: `rotate(${t.rotate})` }}>
-              <div className="overflow-hidden torn-edge">
-                <img src={t.src} alt={t.label} className="w-full h-20 object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-              </div>
-              <div className="mt-2">
-                <span className="font-mono text-[8px] text-muted-foreground uppercase tracking-wider">{t.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      </main>
 
       {/* ════════════════════ SECTIONS ════════════════════ */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24 space-y-28 relative z-10">
