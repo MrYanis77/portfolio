@@ -80,14 +80,14 @@ const experiences = [
 ];
 
 const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1 },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2 },
+  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, images: [projectGame1, projectGame3, projectGame5], github: "#", download: "#" },
+  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, images: [projectGame2, projectGame4, projectGame1], github: "#", download: "#" },
 ];
 
 const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3 },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4 },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5 },
+  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, images: [projectGame3, projectGame1, projectGame2], github: "#", download: "#" },
+  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, images: [projectGame4, projectGame5, projectGame3], github: "#", download: "#" },
+  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, images: [projectGame5, projectGame2, projectGame4], github: "#", download: "#" },
 ];
 
 const formations = [
@@ -155,6 +155,7 @@ const PROJECTS_PER_PAGE = 2;
 
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
+  const [projectLightbox, setProjectLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
@@ -176,6 +177,33 @@ const Index = () => {
         </div>
       )}
 
+      {/* Project lightbox with manual navigation */}
+      {projectLightbox && (
+        <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
+          <div className="relative max-w-3xl w-full animate-scale-in" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setProjectLightbox(null)} className="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
+              <X className="h-4 w-4" />
+            </button>
+            <p className="text-center font-mono text-xs text-primary mb-3 uppercase tracking-wider">{projectLightbox.title}</p>
+            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-sm border border-border" />
+            <div className="flex items-center justify-between mt-4">
+              <button
+                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length })}
+                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <span className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</span>
+              <button
+                onClick={() => setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length })}
+                className="h-9 w-9 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Nav */}
       <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
         <div className="flex items-center gap-3">
@@ -381,8 +409,8 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projetsPro.slice(proPage * PROJECTS_PER_PAGE, proPage * PROJECTS_PER_PAGE + PROJECTS_PER_PAGE).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group">
+                  <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}>
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-6">
@@ -392,6 +420,16 @@ const Index = () => {
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
                     <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
+                    <div className="flex gap-2 mt-4">
+                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground text-[10px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <Github className="h-3.5 w-3.5" />
+                        GitHub
+                      </a>
+                      <a href={p.download} download className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground text-[10px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <FileDown className="h-3.5 w-3.5" />
+                        Doc
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -415,8 +453,8 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group">
+                  <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}>
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-5">
@@ -426,6 +464,16 @@ const Index = () => {
                     </div>
                     <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
                     <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                    <div className="flex gap-2 mt-3">
+                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <Github className="h-3 w-3" />
+                        GitHub
+                      </a>
+                      <a href={p.download} download className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <FileDown className="h-3 w-3" />
+                        Doc
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
