@@ -453,8 +453,8 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
+                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group">
+                  <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}>
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-5">
@@ -464,6 +464,16 @@ const Index = () => {
                     </div>
                     <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
                     <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
+                    <div className="flex gap-2 mt-3">
+                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <Github className="h-3 w-3" />
+                        GitHub
+                      </a>
+                      <a href={p.download} download className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
+                        <FileDown className="h-3 w-3" />
+                        Doc
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
