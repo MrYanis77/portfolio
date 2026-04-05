@@ -554,6 +554,24 @@ const Index = () => {
           </div>
         </Section>
 
+        {/* ══ CONTACT ══ */}
+        <Section id="contact">
+          <SectionTitle icon={Mail} label="Contact" />
+          <div className="max-w-xl mx-auto text-center space-y-6">
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Une idée de projet, une question ou simplement envie d'échanger&nbsp;? N'hésitez pas à me contacter&nbsp;!
+            </p>
+            <a
+              href="mailto:votre.email@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground font-mono text-sm uppercase tracking-wider hover:bg-primary/90 transition-colors"
+            >
+              <Mail className="h-4 w-4" /> Envoyer un mail
+            </a>
+          </div>
+        </Section>
+
       </div>
 
       <footer className="border-t border-border px-6 py-10 text-center relative z-10">
