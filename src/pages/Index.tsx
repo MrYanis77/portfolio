@@ -153,6 +153,18 @@ const certifications = [
 
 const PROJECTS_PER_PAGE = 2;
 
+const aboutTabs = [
+  { key: "parcours", label: "Parcours", icon: Layers },
+  { key: "experience", label: "Expérience", icon: Briefcase },
+  { key: "competences", label: "Compétences", icon: Terminal },
+  { key: "outils", label: "Outils", icon: Wrench },
+  { key: "qualites", label: "Qualités", icon: Star },
+  { key: "formations", label: "Formations", icon: GraduationCap },
+  { key: "certifications", label: "Certifications", icon: Award },
+] as const;
+
+type AboutTab = typeof aboutTabs[number]["key"];
+
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
   const [projectLightbox, setProjectLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
@@ -160,8 +172,12 @@ const Index = () => {
   const [persoPage, setPersoPage] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const [compTab, setCompTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
+  const [aboutTab, setAboutTab] = useState<AboutTab>("parcours");
   const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
   const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
+
+  const allProjects = [...projetsPro, ...projetsPerso];
+
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
 
@@ -179,8 +195,7 @@ const Index = () => {
 
       {/* Project lightbox with manual navigation */}
       {projectLightbox && (
-        <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
-          {/* Left arrow — on the side */}
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
           <button
             onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length }); }}
             className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 z-10"
@@ -188,17 +203,30 @@ const Index = () => {
             <ChevronLeft className="h-5 w-5" />
           </button>
 
-          {/* Content */}
           <div className="relative max-w-3xl w-full animate-scale-in mx-16" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setProjectLightbox(null)} className="absolute top-2 right-2 h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors z-10">
-              <X className="h-4 w-4" />
-            </button>
-            <p className="text-center font-mono text-xs text-primary mb-3 uppercase tracking-wider">{projectLightbox.title}</p>
-            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-sm border border-border" />
-            <p className="text-center font-mono text-xs text-muted-foreground mt-3">{projectLightbox.index + 1} / {projectLightbox.images.length}</p>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+              <button onClick={() => setProjectLightbox(null)} className="h-8 w-8 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary transition-colors">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-lg border border-border" />
+            <div className="flex items-center justify-between mt-4">
+              <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</p>
+              <div className="flex gap-3">
+                <a href="#" className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
+                  <Github className="h-4 w-4" />
+                </a>
+                <a href="#" className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
+                  <Globe className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+            <div className="flex justify-end mt-4">
+              <button onClick={() => setProjectLightbox(null)} className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono">Close</button>
+            </div>
           </div>
 
-          {/* Right arrow — on the side */}
           <button
             onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length }); }}
             className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 z-10"
@@ -207,326 +235,6 @@ const Index = () => {
           </button>
         </div>
       )}
-      {/* Nav */}
-      <nav className="px-6 lg:px-10 py-5 flex items-center justify-between sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-border/50">
-        <div className="flex items-center gap-3">
-          <img src={logoGamedev} alt="GameDev Logo" className="h-8 w-8 rounded-full object-cover" />
-          <span className="font-display text-lg font-extrabold text-foreground uppercase tracking-widest">GameDev</span>
-        </div>
-        <div className="flex items-center gap-8">
-          {[
-            { href: "#parcours", label: "Parcours" },
-            { href: "#projets", label: "Projets" },
-            { href: "#competences", label: "Skills" },
-          ].map((link) => (
-            <a key={link.href} href={link.href} className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider">{link.label}</a>
-          ))}
-          <a href="#" className="text-xs font-mono font-bold text-primary-foreground bg-primary px-5 py-2 hover:brightness-110 transition-all active:scale-95 uppercase tracking-wider">Contact</a>
-          <ThemeToggle />
-        </div>
-      </nav>
-
-      {/* ═══ HERO — 40/60 split: Présentation | Carrousel ═══ */}
-      <main className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-14 items-center min-h-[75vh]">
-
-          {/* LEFT — Présentation (40%) */}
-          <div className="flex flex-col gap-8 animate-fade-up">
-            <div>
-              <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-4">
-                Portfolio — Game Developer
-              </p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tight leading-none">
-                Prénom Nom
-              </h1>
-              <p className="font-mono text-sm text-muted-foreground uppercase tracking-[0.2em] mt-3">
-                Développeur Jeux Vidéo — Unreal / Unity
-              </p>
-              <p className="text-sm text-muted-foreground/70 mt-3 leading-relaxed max-w-sm">
-                En recherche d'un poste de Game Developer pour créer des expériences immersives et innovantes.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {["C++", "C#", "Unreal", "Unity", "OpenGL"].map((t) => (
-                <span key={t} className="text-[9px] px-2.5 py-1 border border-border text-muted-foreground font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-colors cursor-default">{t}</span>
-              ))}
-            </div>
-
-            <div className="flex gap-3 items-center flex-wrap">
-              {[
-                { Icon: Github, label: "GitHub" },
-                { Icon: Linkedin, label: "LinkedIn" },
-                { Icon: Mail, label: "Email" },
-              ].map(({ Icon, label }) => (
-                <a key={label} href="#" className="h-9 w-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90">
-                  <Icon className="h-3.5 w-3.5" />
-                </a>
-              ))}
-              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" download className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-mono font-bold uppercase tracking-wider hover:brightness-110 transition-all active:scale-95">
-                <FileDown className="h-3.5 w-3.5" />
-                CV PDF
-              </a>
-            </div>
-
-            <a href="#parcours" className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider group mt-2">
-              <ArrowDown className="h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
-              Scroll to explore
-            </a>
-          </div>
-
-          {/* RIGHT — Carrousel (60%) */}
-          <div className="animate-slide-in-right" style={{ animationDelay: "0.15s" }}>
-            <ProjectCarousel />
-          </div>
-
-        </div>
-      </main>
-
-      {/* ════════════════════ SECTIONS ════════════════════ */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24 space-y-28 relative z-10">
-
-        {/* ── Parcours ── */}
-        <Section id="parcours">
-          <SectionTitle icon={Layers} label="Mon Parcours" />
-          <div className="relative pl-8">
-            <div className="absolute left-3 top-2 bottom-2 w-px bg-primary/30" />
-            {parcours.map((p, i) => (
-              <div key={i} className="relative mb-8 last:mb-0 group">
-                <div className={`absolute -left-[21px] top-2 h-3 w-3 rounded-full ${p.highlight ? 'bg-primary' : 'bg-border'} ring-4 ring-background group-hover:scale-150 transition-transform`} />
-                <div className="bg-card border border-border p-5 ml-2 hover:border-primary/30 transition-all">
-                  <span className="font-mono text-xs text-primary font-bold">{p.year}</span>
-                  <p className="text-sm text-foreground mt-1 font-medium">{p.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Expérience Pro ── */}
-        <Section id="experience">
-          <SectionTitle icon={Briefcase} label="Expérience" />
-          <div className="space-y-5">
-            {experiences.map((exp, i) => (
-              <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                  <div>
-                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{exp.role}</h3>
-                    <p className="text-sm text-muted-foreground font-mono">{exp.company}</p>
-                  </div>
-                  <span className="font-mono text-xs text-primary/70 font-medium">{exp.period}</span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{exp.desc}</p>
-                <div className="flex gap-2 flex-wrap">
-                  {exp.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] px-2.5 py-1 border border-primary/20 text-primary font-mono uppercase tracking-wider">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Projets ── */}
-        <Section id="projets">
-          <SectionTitle icon={Gamepad2} label="Projets" />
-
-          <div className="mb-10">
-            <div className="flex items-center justify-between mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 text-primary text-xs font-mono uppercase tracking-wider">
-                <Trophy className="h-3.5 w-3.5" />
-                Projets professionnels
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-muted-foreground">{proPage + 1}/{proMaxPage + 1}</span>
-                <button onClick={() => setProPage(Math.max(0, proPage - 1))} disabled={proPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => setProPage(Math.min(proMaxPage, proPage + 1))} disabled={proPage >= proMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {projetsPro.slice(proPage * PROJECTS_PER_PAGE, proPage * PROJECTS_PER_PAGE + PROJECTS_PER_PAGE).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group">
-                  <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}>
-                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                    <span className="font-mono text-xs text-primary/70 font-medium">{p.tech}</span>
-                    <div className="flex gap-2 mt-4">
-                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground text-[10px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
-                        <Github className="h-3.5 w-3.5" />
-                        GitHub
-                      </a>
-                      <a href={p.download} download className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground text-[10px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
-                        <FileDown className="h-3.5 w-3.5" />
-                        Doc
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-muted-foreground text-xs font-mono uppercase tracking-wider">
-                <Code2 className="h-3.5 w-3.5" />
-                Projets personnels
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-muted-foreground">{persoPage + 1}/{persoMaxPage + 1}</span>
-                <button onClick={() => setPersoPage(Math.max(0, persoPage - 1))} disabled={persoPage === 0} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => setPersoPage(Math.min(persoMaxPage, persoPage + 1))} disabled={persoPage >= persoMaxPage} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {projetsPerso.slice(persoPage * 3, persoPage * 3 + 3).map((p, i) => (
-                <div key={i} className="bg-card border border-border overflow-hidden hover:border-primary/30 transition-all group">
-                  <div className="aspect-video overflow-hidden cursor-pointer" onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}>
-                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-all" />
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
-                    <span className="font-mono text-[11px] text-primary/50 font-medium">{p.tech}</span>
-                    <div className="flex gap-2 mt-3">
-                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
-                        <Github className="h-3 w-3" />
-                        GitHub
-                      </a>
-                      <a href={p.download} download className="flex items-center gap-1.5 px-2.5 py-1 border border-border text-muted-foreground text-[9px] font-mono uppercase tracking-wider hover:border-primary hover:text-primary transition-all active:scale-95">
-                        <FileDown className="h-3 w-3" />
-                        Doc
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Section>
-
-        {/* ── Formations ── */}
-        <Section>
-          <SectionTitle icon={GraduationCap} label="Formations" />
-          <div className="space-y-5">
-            {formations.map((f, i) => (
-              <div key={i} className="flex items-start gap-5 bg-card border border-border p-6 hover:border-primary/30 transition-all">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <GraduationCap className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-foreground">{f.title}</h3>
-                  <p className="text-sm text-muted-foreground font-mono mt-0.5">{f.school} — {f.year}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{f.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Qualités ── */}
-        <Section>
-          <SectionTitle icon={Star} label="Qualités" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {qualites.map((q, i) => (
-              <div key={i} className="bg-card border border-border p-6 hover:border-primary/30 transition-all group">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <q.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-sm font-bold text-foreground mb-1.5 uppercase tracking-wide">{q.label}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{q.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Mes Outils ── */}
-        <Section>
-          <SectionTitle icon={Wrench} label="Mes Outils" />
-          <div className="flex gap-2 mb-6">
-            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
-              <button key={tab} onClick={() => setOutilsTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${outilsTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
-                {tab}
-              </button>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {outils[outilsTab].map((o, i) => (
-              <div key={i} className="bg-card border border-border p-4 text-center hover:border-primary/30 transition-all group">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                  <Terminal className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xs font-bold text-foreground mb-0.5">{o.name}</h3>
-                <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-wider">{o.category}</span>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Compétences ── */}
-        <Section id="competences">
-          <SectionTitle icon={Terminal} label="Compétences" />
-          <div className="flex gap-2 mb-6">
-            {(["Front-end", "Back-end", "UX / UI"] as const).map((tab) => (
-              <button key={tab} onClick={() => setCompTab(tab)} className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all ${compTab === tab ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/40 hover:text-primary'}`}>
-                {tab}
-              </button>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {competences[compTab].map((c, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center gap-3 bg-card border border-border rounded-xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
-              >
-                <div className="h-16 w-16 flex items-center justify-center">
-                  <img src={c.logo} alt={c.name} loading="lazy" width={64} height={64} className="object-contain group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="font-mono text-xs text-foreground font-bold tracking-wider text-center uppercase">{c.name}</span>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Certifications ── */}
-        <Section>
-          <SectionTitle icon={Award} label="Certifications" />
-          <div className="space-y-4">
-            {certifications.map((c, i) => (
-              <div key={i} className="flex items-center gap-5 bg-card border border-border p-5 hover:border-primary/30 transition-all group">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Award className="h-5 w-5 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-bold text-foreground">{c.title}</h3>
-                  <p className="text-sm text-muted-foreground font-mono">{c.org}</p>
-                </div>
-                <button onClick={() => setCertImage(c.image)} className="h-8 w-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all active:scale-90 shrink-0" title="Voir le certificat">
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </button>
-                <span className="font-mono text-xs text-primary/60 font-medium">{c.year}</span>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-      </div>
 
       {/* Footer */}
       <footer className="border-t border-border px-6 py-10 text-center relative z-10">
