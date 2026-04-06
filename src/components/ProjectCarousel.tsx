@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import projectGame1 from "@/assets/project-game-1.jpg";
 import projectGame2 from "@/assets/project-game-2.jpg";
 import projectGame3 from "@/assets/project-game-3.jpg";
@@ -35,7 +35,7 @@ const ProjectCarousel = () => {
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[3/2] overflow-hidden torn-edge bg-muted">
+      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border glow-primary">
         {projects.map((project, i) => (
           <div
             key={i}
@@ -47,25 +47,27 @@ const ProjectCarousel = () => {
             }}
           >
             <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm px-5 py-3 flex items-center justify-between">
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between">
               <div>
-                <h3 className="text-sm font-bold text-foreground">{project.title}</h3>
-                <p className="text-xs text-muted-foreground">{project.category}</p>
+                <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-1">{project.category}</p>
+                <h3 className="text-lg font-display font-bold text-foreground glow-text-primary">{project.title}</h3>
               </div>
-              <span className="font-mono text-[11px] text-primary font-medium">{project.tech}</span>
+              <span className="font-mono text-xs text-primary font-medium px-3 py-1 border border-primary/30 rounded-full bg-background/50 backdrop-blur-sm">{project.tech}</span>
             </div>
           </div>
         ))}
 
         <button
           onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
         <button
           onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-background/60 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
@@ -79,7 +81,7 @@ const ProjectCarousel = () => {
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-7 bg-primary' : 'w-2 bg-border hover:bg-muted-foreground'}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-7 bg-primary glow-primary' : 'w-2 bg-border hover:bg-muted-foreground'}`}
           />
         ))}
       </div>
