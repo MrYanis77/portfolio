@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, ArrowDown, FileDown, ExternalLink, X, Wrench, Globe, User, Cpu, Monitor } from "lucide-react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, ArrowDown, FileDown, ExternalLink, X, Wrench, Globe, User, Cpu, Monitor, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -79,15 +79,18 @@ const experiences = [
   { role: "Engine Programmer", company: "PixelWave Games", period: "2021 – 2023", desc: "Optimisation rendu mobile, système de particules custom, profiling mémoire.", tags: ["C++", "OpenGL ES", "Metal"] },
 ];
 
+type MediaItem = { type: "image" | "video"; src: string };
+
 const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, images: [projectGame1, projectGame3, projectGame5], github: "#", download: "#" },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, images: [projectGame2, projectGame4, projectGame1], github: "#", download: "#" },
+  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
+  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, media: [{ type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame1 }], github: "#", download: "#" },
+  // Pour ajouter une vidéo : { type: "video", src: "/videos/gameplay.mp4" }
 ];
 
 const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, images: [projectGame3, projectGame1, projectGame2], github: "#", download: "#" },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, images: [projectGame4, projectGame5, projectGame3], github: "#", download: "#" },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, images: [projectGame5, projectGame2, projectGame4], github: "#", download: "#" },
+  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
+  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, media: [{ type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
+  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }], github: "#", download: "#" },
 ];
 
 const formations = [
@@ -167,7 +170,7 @@ type AboutTab = typeof aboutTabs[number]["key"];
 
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
-  const [projectLightbox, setProjectLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
+  const [projectLightbox, setProjectLightbox] = useState<{ media: MediaItem[]; index: number; title: string } | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
@@ -199,10 +202,13 @@ const Index = () => {
       )}
 
       {/* Project lightbox */}
-      {projectLightbox && (
+      {projectLightbox && (() => {
+        const currentMedia = projectLightbox.media[projectLightbox.index];
+        const total = projectLightbox.media.length;
+        return (
         <div className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-md flex flex-col items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
           <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length }); }}
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + total) % total }); }}
             className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -210,14 +216,36 @@ const Index = () => {
 
           <div className="relative max-w-3xl w-full animate-scale-in mx-16" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+              <div className="flex items-center gap-2">
+                {currentMedia.type === "video" && <Play className="h-4 w-4 text-accent fill-accent" />}
+                <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+              </div>
               <button onClick={() => setProjectLightbox(null)} className="h-8 w-8 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-colors">
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
+            {currentMedia.type === "video" ? (
+              <video
+                key={projectLightbox.index}
+                src={currentMedia.src}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-auto rounded-xl border border-accent/20 glow-accent"
+              />
+            ) : (
+              <img src={currentMedia.src} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
+            )}
             <div className="flex items-center justify-between mt-4">
-              <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</p>
+              <div className="flex items-center gap-3">
+                <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {total}</p>
+                {/* Media type indicators */}
+                <div className="flex gap-1">
+                  {projectLightbox.media.map((m, i) => (
+                    <button key={i} onClick={() => setProjectLightbox({ ...projectLightbox, index: i })} className={`h-1.5 rounded-full transition-all ${i === projectLightbox.index ? (m.type === "video" ? 'w-6 bg-accent' : 'w-6 bg-primary') : 'w-1.5 bg-border hover:bg-muted-foreground'}`} />
+                  ))}
+                </div>
+              </div>
               <div className="flex gap-3">
                 <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
                   <Github className="h-4 w-4" />
@@ -230,13 +258,14 @@ const Index = () => {
           </div>
 
           <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length }); }}
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % total }); }}
             className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
-      )}
+        );
+      })()}
 
       {/* ═══ NAV ═══ */}
       <nav className="px-6 lg:px-10 py-4 flex items-center justify-between sticky top-0 glass z-50 border-b border-primary/10">
@@ -535,7 +564,7 @@ const Index = () => {
                     <h3 className="text-lg font-display font-bold text-foreground mb-2">{p.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{p.desc}</p>
                     <button
-                      onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}
+                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
                       className="w-full py-3 border border-primary/30 bg-primary/5 rounded-lg text-primary text-sm font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
                     >
                       View Details <ArrowUpRight className="h-4 w-4" />
@@ -578,7 +607,7 @@ const Index = () => {
                     <h3 className="text-base font-display font-bold text-foreground mb-2">{p.title}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed mb-5 flex-1">{p.desc}</p>
                     <button
-                      onClick={() => setProjectLightbox({ images: p.images, index: 0, title: p.title })}
+                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
                       className="w-full py-2.5 border border-primary/30 bg-primary/5 rounded-lg text-primary text-xs font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
                     >
                       View Details <ArrowUpRight className="h-3.5 w-3.5" />
