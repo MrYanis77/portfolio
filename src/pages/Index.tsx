@@ -202,10 +202,13 @@ const Index = () => {
       )}
 
       {/* Project lightbox */}
-      {projectLightbox && (
+      {projectLightbox && (() => {
+        const currentMedia = projectLightbox.media[projectLightbox.index];
+        const total = projectLightbox.media.length;
+        return (
         <div className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-md flex flex-col items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
           <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + projectLightbox.images.length) % projectLightbox.images.length }); }}
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + total) % total }); }}
             className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -213,14 +216,36 @@ const Index = () => {
 
           <div className="relative max-w-3xl w-full animate-scale-in mx-16" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+              <div className="flex items-center gap-2">
+                {currentMedia.type === "video" && <Play className="h-4 w-4 text-accent fill-accent" />}
+                <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+              </div>
               <button onClick={() => setProjectLightbox(null)} className="h-8 w-8 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-colors">
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <img src={projectLightbox.images[projectLightbox.index]} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
+            {currentMedia.type === "video" ? (
+              <video
+                key={projectLightbox.index}
+                src={currentMedia.src}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-auto rounded-xl border border-accent/20 glow-accent"
+              />
+            ) : (
+              <img src={currentMedia.src} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
+            )}
             <div className="flex items-center justify-between mt-4">
-              <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {projectLightbox.images.length}</p>
+              <div className="flex items-center gap-3">
+                <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {total}</p>
+                {/* Media type indicators */}
+                <div className="flex gap-1">
+                  {projectLightbox.media.map((m, i) => (
+                    <button key={i} onClick={() => setProjectLightbox({ ...projectLightbox, index: i })} className={`h-1.5 rounded-full transition-all ${i === projectLightbox.index ? (m.type === "video" ? 'w-6 bg-accent' : 'w-6 bg-primary') : 'w-1.5 bg-border hover:bg-muted-foreground'}`} />
+                  ))}
+                </div>
+              </div>
               <div className="flex gap-3">
                 <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
                   <Github className="h-4 w-4" />
@@ -233,13 +258,14 @@ const Index = () => {
           </div>
 
           <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % projectLightbox.images.length }); }}
+            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % total }); }}
             className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
-      )}
+        );
+      })()}
 
       {/* ═══ NAV ═══ */}
       <nav className="px-6 lg:px-10 py-4 flex items-center justify-between sticky top-0 glass z-50 border-b border-primary/10">
