@@ -6,12 +6,22 @@ import projectGame3 from "@/assets/project-game-3.jpg";
 import projectGame4 from "@/assets/project-game-4.jpg";
 import projectGame5 from "@/assets/project-game-5.jpg";
 
-const projects = [
-  { image: projectGame1, title: "Void Station", category: "Unreal Engine 5", tech: "C++ / Blueprints" },
-  { image: projectGame2, title: "Pixel Brawl", category: "2D Platformer", tech: "Unity / C#" },
-  { image: projectGame3, title: "Ember Gate", category: "Action RPG", tech: "Custom Engine / C++" },
-  { image: projectGame4, title: "Neon Command", category: "Sci-Fi Strategy", tech: "C++ / Custom Engine" },
-  { image: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
+export type CarouselMedia = {
+  type: "image" | "video";
+  src: string;
+  title: string;
+  category: string;
+  tech: string;
+};
+
+const projects: CarouselMedia[] = [
+  { type: "image", src: projectGame1, title: "Void Station", category: "Unreal Engine 5", tech: "C++ / Blueprints" },
+  { type: "image", src: projectGame2, title: "Pixel Brawl", category: "2D Platformer", tech: "Unity / C#" },
+  { type: "image", src: projectGame3, title: "Ember Gate", category: "Action RPG", tech: "Custom Engine / C++" },
+  { type: "image", src: projectGame4, title: "Neon Command", category: "Sci-Fi Strategy", tech: "C++ / Custom Engine" },
+  { type: "image", src: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
+  // Exemple vidéo — décommente et remplace le src par ton fichier .mp4
+  // { type: "video", src: "/videos/demo-reel.mp4", title: "Demo Reel", category: "Showreel", tech: "Gameplay" },
 ];
 
 const ProjectCarousel = () => {
@@ -29,9 +39,11 @@ const ProjectCarousel = () => {
   const prev = useCallback(() => goTo((current - 1 + projects.length) % projects.length), [current, goTo]);
 
   useEffect(() => {
+    // Auto-advance only on images
+    if (projects[current].type === "video") return;
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, current]);
 
   return (
     <div className="w-full">
@@ -44,14 +56,30 @@ const ProjectCarousel = () => {
               opacity: i === current ? 1 : 0,
               transform: i === current ? "scale(1)" : "scale(1.05)",
               transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+              pointerEvents: i === current ? "auto" : "none",
             }}
           >
-            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            {project.type === "video" ? (
+              <video
+                src={project.src}
+                className="h-full w-full object-cover"
+                controls
+                playsInline
+                muted
+                autoPlay={i === current}
+                onEnded={next}
+              />
+            ) : (
+              <img src={project.src} alt={project.title} className="h-full w-full object-cover" />
+            )}
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between">
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between pointer-events-none">
               <div>
-                <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-1">{project.category}</p>
+                <div className="flex items-center gap-2 mb-1">
+                  {project.type === "video" && <Play className="h-3 w-3 text-accent fill-accent" />}
+                  <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em]">{project.category}</p>
+                </div>
                 <h3 className="text-lg font-display font-bold text-foreground glow-text-primary">{project.title}</h3>
               </div>
               <span className="font-mono text-xs text-primary font-medium px-3 py-1 border border-primary/30 rounded-full bg-background/50 backdrop-blur-sm">{project.tech}</span>
@@ -61,13 +89,13 @@ const ProjectCarousel = () => {
 
         <button
           onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90 z-10"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
         <button
           onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all active:scale-90 z-10"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
@@ -77,11 +105,11 @@ const ProjectCarousel = () => {
         <span className="font-mono text-[11px] text-muted-foreground mr-2">
           {String(current + 1).padStart(2, "0")}/{String(projects.length).padStart(2, "0")}
         </span>
-        {projects.map((_, i) => (
+        {projects.map((p, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-7 bg-primary glow-primary' : 'w-2 bg-border hover:bg-muted-foreground'}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? (p.type === "video" ? 'w-7 bg-accent glow-accent' : 'w-7 bg-primary glow-primary') : 'w-2 bg-border hover:bg-muted-foreground'}`}
           />
         ))}
       </div>
