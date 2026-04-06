@@ -79,15 +79,18 @@ const experiences = [
   { role: "Engine Programmer", company: "PixelWave Games", period: "2021 – 2023", desc: "Optimisation rendu mobile, système de particules custom, profiling mémoire.", tags: ["C++", "OpenGL ES", "Metal"] },
 ];
 
+type MediaItem = { type: "image" | "video"; src: string };
+
 const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, images: [projectGame1, projectGame3, projectGame5], github: "#", download: "#" },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, images: [projectGame2, projectGame4, projectGame1], github: "#", download: "#" },
+  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
+  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, media: [{ type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame1 }], github: "#", download: "#" },
+  // Pour ajouter une vidéo : { type: "video", src: "/videos/gameplay.mp4" }
 ];
 
 const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, images: [projectGame3, projectGame1, projectGame2], github: "#", download: "#" },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, images: [projectGame4, projectGame5, projectGame3], github: "#", download: "#" },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, images: [projectGame5, projectGame2, projectGame4], github: "#", download: "#" },
+  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
+  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, media: [{ type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
+  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }], github: "#", download: "#" },
 ];
 
 const formations = [
