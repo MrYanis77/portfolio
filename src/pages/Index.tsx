@@ -170,7 +170,7 @@ type AboutTab = typeof aboutTabs[number]["key"];
 
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
-  const [projectLightbox, setProjectLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
+  const [projectLightbox, setProjectLightbox] = useState<{ media: MediaItem[]; index: number; title: string } | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
