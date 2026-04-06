@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, ArrowDown, FileDown, ExternalLink, X, Wrench, Globe, User, Cpu, Monitor } from "lucide-react";
+import { Github, Linkedin, Mail, Briefcase, GraduationCap, Award, Code2, Gamepad2, Trophy, Star, ChevronRight, ChevronLeft, Terminal, Layers, Users, Zap, Target, Brain, Heart, Shield, ArrowUpRight, ArrowDown, FileDown, ExternalLink, X, Wrench, Globe, User, Cpu, Monitor, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import ThemeToggle from "@/components/ThemeToggle";
