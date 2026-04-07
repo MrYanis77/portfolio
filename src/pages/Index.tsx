@@ -302,31 +302,15 @@ const Index = () => {
           {/* LEFT — Présentation (40%) */}
           <div className="flex flex-col gap-8 animate-fade-up">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 mb-6">
-                <Cpu className="h-3 w-3 text-primary" />
-                <span className="font-mono text-[10px] text-primary uppercase tracking-[0.2em]">Game Developer</span>
-              </div>
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
                 <span className="text-foreground">Prénom</span>{" "}
                 <span className="gradient-text">Nom</span>
               </h1>
-              <p className="font-mono text-sm text-muted-foreground uppercase tracking-[0.15em] mt-4 flex items-center gap-2">
-                <Monitor className="h-4 w-4 text-accent" />
-                Développeur Jeux Vidéo — Unreal / Unity
-              </p>
               <p className="text-sm text-muted-foreground/70 mt-4 leading-relaxed max-w-sm">
                 En recherche d'un poste de Game Developer pour créer des expériences immersives et innovantes.
               </p>
             </div>
 
-            {/* Tech tags */}
-            <div className="flex flex-wrap gap-2">
-              {["C++", "C#", "Unreal", "Unity", "OpenGL"].map((t) => (
-                <span key={t} className="text-[10px] px-3 py-1.5 border border-primary/20 bg-primary/5 text-primary font-mono uppercase tracking-wider rounded-lg hover:border-primary/50 hover:bg-primary/10 transition-all cursor-default">
-                  {t}
-                </span>
-              ))}
-            </div>
 
             {/* Social + CV */}
             <div className="flex gap-3 items-center flex-wrap">
