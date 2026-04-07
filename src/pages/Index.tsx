@@ -187,7 +187,7 @@ const Index = () => {
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px]" />
         <div className="absolute top-[40%] left-[50%] w-[400px] h-[400px] rounded-full bg-primary/3 blur-[100px]" />
       </div>
-      <div className="fixed inset-0 grid-pattern pointer-events-none z-0 opacity-40" />
+      
 
       {/* Certification lightbox */}
       {certImage && (

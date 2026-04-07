@@ -47,7 +47,7 @@ const ProjectCarousel = () => {
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border glow-primary">
+      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border">
         {projects.map((project, i) => (
           <div
             key={i}
@@ -80,7 +80,7 @@ const ProjectCarousel = () => {
                   {project.type === "video" && <Play className="h-3 w-3 text-accent fill-accent" />}
                   <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em]">{project.category}</p>
                 </div>
-                <h3 className="text-lg font-display font-bold text-foreground glow-text-primary">{project.title}</h3>
+                <h3 className="text-lg font-display font-bold text-foreground">{project.title}</h3>
               </div>
               <span className="font-mono text-xs text-primary font-medium px-3 py-1 border border-primary/30 rounded-full bg-background/50 backdrop-blur-sm">{project.tech}</span>
             </div>
@@ -109,7 +109,7 @@ const ProjectCarousel = () => {
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? (p.type === "video" ? 'w-7 bg-accent glow-accent' : 'w-7 bg-primary glow-primary') : 'w-2 bg-border hover:bg-muted-foreground'}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? (p.type === "video" ? 'w-7 bg-accent' : 'w-7 bg-primary') : 'w-2 bg-border hover:bg-muted-foreground'}`}
           />
         ))}
       </div>
