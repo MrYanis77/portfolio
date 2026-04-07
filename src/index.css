@@ -127,10 +127,10 @@
 
 /* ── Glassmorphism ── */
 .glass {
-  background: hsl(220 18% 13% / 0.6);
+  background: hsl(var(--card) / 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid hsl(220 12% 20% / 0.5);
+  border: 1px solid hsl(var(--border) / 0.5);
 }
 
 /* ── Gradient text ── */
