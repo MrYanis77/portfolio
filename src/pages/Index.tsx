@@ -284,7 +284,7 @@ const Index = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
             </a>
           ))}
-          <a href="mailto:votre.email@gmail.com" className="text-xs font-mono font-bold text-accent-foreground bg-accent px-5 py-2 rounded-lg hover:brightness-110 transition-all active:scale-95 uppercase tracking-wider glow-accent">
+          <a href="#contact" className="text-xs font-mono font-bold text-accent-foreground bg-accent px-5 py-2 rounded-lg hover:brightness-110 transition-all active:scale-95 uppercase tracking-wider glow-accent">
             Contact
           </a>
           <ThemeToggle />
@@ -598,6 +598,23 @@ const Index = () => {
           </div>
         </Section>
 
+        {/* ══ CONTACT ══ */}
+        <Section id="contact">
+          <SectionTitle icon={Mail} label="Contact" />
+          <div className="max-w-xl mx-auto text-center space-y-8">
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Une idée de projet, une question ou simplement envie d'échanger&nbsp;? N'hésitez pas à me contacter&nbsp;!
+            </p>
+            <a
+              href="mailto:votre.email@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl bg-accent text-accent-foreground font-mono text-sm uppercase tracking-wider hover:brightness-110 transition-all active:scale-95 glow-accent"
+            >
+              <Mail className="h-4 w-4" /> Envoyer un mail
+            </a>
+          </div>
+        </Section>
 
       </div>
 
