@@ -270,10 +270,6 @@ const Index = () => {
       {/* ═══ NAV ═══ */}
       <nav className="px-6 lg:px-10 py-4 flex items-center justify-between sticky top-0 glass z-50 border-b border-primary/10">
         <div className="flex items-center gap-3">
-          <div className="relative">
-            <img src={logoGamedev} alt="GameDev Logo" className="h-9 w-9 rounded-xl object-cover border border-primary/30" />
-            <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent border-2 border-background" />
-          </div>
           <span className="font-display text-lg font-extrabold text-foreground uppercase tracking-widest">
             Game<span className="text-primary">Dev</span>
           </span>
@@ -282,7 +278,6 @@ const Index = () => {
           {[
             { href: "#about", label: "À propos" },
             { href: "#projets", label: "Projets" },
-            { href: "#contact", label: "Contact" },
           ].map((link) => (
             <a key={link.href} href={link.href} className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase tracking-wider relative group">
               {link.label}
@@ -603,23 +598,6 @@ const Index = () => {
           </div>
         </Section>
 
-        {/* ══ CONTACT ══ */}
-        <Section id="contact">
-          <SectionTitle icon={Mail} label="Contact" />
-          <div className="max-w-xl mx-auto text-center space-y-8">
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Une idée de projet, une question ou simplement envie d'échanger&nbsp;? N'hésitez pas à me contacter&nbsp;!
-            </p>
-            <a
-              href="mailto:votre.email@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl bg-accent text-accent-foreground font-mono text-sm uppercase tracking-wider hover:brightness-110 transition-all active:scale-95 glow-accent"
-            >
-              <Mail className="h-4 w-4" /> Envoyer un mail
-            </a>
-          </div>
-        </Section>
 
       </div>
 
