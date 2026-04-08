@@ -532,7 +532,6 @@ const Index = () => {
                 <div key={i} className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/40 transition-all group flex flex-col card-hover">
                   <div className="relative aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                     <div className="absolute bottom-0 inset-x-0 flex justify-center pb-3">
                       <span className="px-6 py-1.5 glass border-primary/30 text-primary text-[10px] font-mono uppercase tracking-[0.2em] rounded-full">
                         {p.tech.split("·")[0]?.trim()}
@@ -575,7 +574,7 @@ const Index = () => {
                 <div key={i} className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/40 transition-all group flex flex-col card-hover">
                   <div className="relative aspect-video overflow-hidden">
                     <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                    
                     <div className="absolute bottom-0 inset-x-0 flex justify-center pb-3">
                       <span className="px-6 py-1.5 glass border-primary/30 text-primary text-[10px] font-mono uppercase tracking-[0.2em] rounded-full">
                         {p.tech.split("·")[0]?.trim()}
