@@ -93,6 +93,12 @@ const projetsPerso = [
   { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }], github: "#", download: "#" },
 ];
 
+const projetsDessin = [
+  { title: "Concept Art — Personnage", desc: "Character design pour un RPG fantastique.", tech: "Photoshop · Procreate", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
+  { title: "Environment Art", desc: "Illustration d'environnement post-apocalyptique.", tech: "Photoshop · Clip Studio", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
+  { title: "Storyboard — Cinématique", desc: "Storyboard pour une cinématique in-game.", tech: "Procreate · Photoshop", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
+];
+
 const formations = [
   { title: "Master Game Programming", school: "ISART Digital", year: "2019", detail: "Spécialisation moteur et gameplay" },
   { title: "Licence Informatique", school: "Université Paris-Saclay", year: "2017", detail: "Algorithmique, structures de données, maths appliquées" },
