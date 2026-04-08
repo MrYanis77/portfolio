@@ -182,8 +182,10 @@ const Index = () => {
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const [compTab, setCompTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
   const [aboutTab, setAboutTab] = useState<AboutTab>("parcours");
+  const [dessinPage, setDessinPage] = useState(0);
   const proMaxPage = Math.ceil(projetsPro.length / PROJECTS_PER_PAGE) - 1;
   const persoMaxPage = Math.ceil(projetsPerso.length / 3) - 1;
+  const dessinMaxPage = Math.ceil(projetsDessin.length / 3) - 1;
 
   return (
     <div className="min-h-screen bg-background overflow-hidden relative noise">
