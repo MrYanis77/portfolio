@@ -78,7 +78,7 @@ const ProjectCarousel = () => {
                   {project.type === "video" && <Play className="h-3 w-3 text-accent fill-accent" />}
                   <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em]">{project.category}</p>
                 </div>
-                <h3 className="text-lg font-display font-bold text-foreground">{project.title}</h3>
+                <h3 className="text-lg font-display font-bold text-white drop-shadow-md">{project.title}</h3>
               </div>
               <span className="font-mono text-xs text-primary font-medium px-3 py-1 border border-primary/30 rounded-full bg-background/50 backdrop-blur-sm">{project.tech}</span>
             </div>
