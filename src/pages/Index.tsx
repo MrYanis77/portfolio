@@ -222,7 +222,7 @@ const Index = () => {
             <ChevronLeft className="h-5 w-5" />
           </button>
 
-          <div className="relative max-w-3xl w-full animate-scale-in mx-16" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-2xl w-full animate-scale-in mx-4 sm:mx-16" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 {currentMedia.type === "video" && <Play className="h-4 w-4 text-accent fill-accent" />}
