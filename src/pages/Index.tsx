@@ -603,8 +603,50 @@ const Index = () => {
               ))}
             </div>
           </div>
-        </Section>
 
+          {/* Dessins */}
+          <div className="mt-14">
+            <div className="flex items-center justify-between mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 bg-primary/5 text-primary text-xs font-mono uppercase tracking-wider rounded-lg">
+                <Palette className="h-3.5 w-3.5" /> Mes Dessins
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-muted-foreground">{dessinPage + 1}/{dessinMaxPage + 1}</span>
+                <button onClick={() => setDessinPage(Math.max(0, dessinPage - 1))} disabled={dessinPage === 0} className="h-8 w-8 rounded-lg border border-border bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => setDessinPage(Math.min(dessinMaxPage, dessinPage + 1))} disabled={dessinPage >= dessinMaxPage} className="h-8 w-8 rounded-lg border border-border bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-90">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {projetsDessin.slice(dessinPage * 3, dessinPage * 3 + 3).map((p, i) => (
+                <div key={i} className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/40 transition-all group flex flex-col card-hover">
+                  <div className="relative aspect-video overflow-hidden">
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute bottom-0 inset-x-0 flex justify-center pb-3">
+                      <span className="px-6 py-1.5 glass border-primary/30 text-primary text-[10px] font-mono uppercase tracking-[0.2em] rounded-full">
+                        {p.tech.split("·")[0]?.trim()}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="text-base font-display font-bold text-foreground mb-2">{p.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-5 flex-1">{p.desc}</p>
+                    <button
+                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
+                      className="w-full py-2.5 border border-primary/30 bg-primary/5 rounded-lg text-primary text-xs font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
+                    >
+                      View Details <ArrowUpRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </Section>
 
       </div>
 
