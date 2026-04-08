@@ -72,8 +72,8 @@ const ProjectCarousel = () => {
             ) : (
               <img src={project.src} alt={project.title} className="h-full w-full object-cover" />
             )}
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+            {/* Bottom text backdrop only */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between pointer-events-none">
               <div>
                 <div className="flex items-center gap-2 mb-1">
