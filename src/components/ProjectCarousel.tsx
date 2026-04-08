@@ -47,7 +47,7 @@ const ProjectCarousel = () => {
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border">
+      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border shadow-[0_8px_30px_-4px_rgba(0,0,0,0.3)] dark:shadow-[0_8px_30px_-4px_rgba(255,255,255,0.15)]">
         {projects.map((project, i) => (
           <div
             key={i}
