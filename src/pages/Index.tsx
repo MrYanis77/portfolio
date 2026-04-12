@@ -81,22 +81,114 @@ const experiences = [
 
 type MediaItem = { type: "image" | "video"; src: string };
 
-const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, media: [{ type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame1 }], github: "#", download: "#" },
-  // Pour ajouter une vidéo : { type: "video", src: "/videos/gameplay.mp4" }
+type ProjectData = {
+  title: string;
+  desc: string;
+  tech: string;
+  image: string;
+  media: MediaItem[];
+  github: string;
+  download: string;
+  role?: string;
+  teamSize?: string;
+  timeframe?: string;
+  engine?: string;
+  introduction?: string;
+  sections?: { heading: string; content: string }[];
+};
+
+const projetsPro: ProjectData[] = [
+  {
+    title: "Echoes of Valheim",
+    desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.",
+    tech: "Unreal 5 · C++",
+    image: projectGame1,
+    media: [{ type: "image", src: projectGame1 }, { type: "image", src: projectGame3 }, { type: "image", src: projectGame5 }],
+    github: "#", download: "#",
+    role: "Gameplay Programmer",
+    teamSize: "4",
+    timeframe: "8 Months",
+    engine: "Unreal Engine 5 (C++)",
+    introduction: "Ce projet d'Action-RPG open world m'a permis de concevoir des systèmes de gameplay complexes comme le loot dynamique, l'inventaire modulaire et les quêtes procédurales. J'ai travaillé en étroite collaboration avec les game designers pour itérer rapidement sur les mécaniques de jeu et assurer une expérience fluide.",
+    sections: [
+      { heading: "Système de Loot", content: "J'ai implémenté un système de loot basé sur des tables de probabilité pondérées, avec des modificateurs de rareté et des bonus contextuels selon la zone et le niveau du joueur. Le système supporte le loot pooling pour optimiser les allocations mémoire." },
+      { heading: "Quêtes Dynamiques", content: "Le système de quêtes utilise un graphe de décision permettant des embranchements multiples. Chaque quête peut être influencée par les actions précédentes du joueur, créant une narration émergente unique à chaque partie." },
+    ],
+  },
+  {
+    title: "Shadow Protocol",
+    desc: "FPS tactique multijoueur — netcode, hit detection, replication.",
+    tech: "Unreal 5 · C++ · Steam SDK",
+    image: projectGame2,
+    media: [{ type: "image", src: projectGame2 }, { type: "image", src: projectGame4 }, { type: "image", src: projectGame1 }],
+    github: "#", download: "#",
+    role: "Network Programmer",
+    teamSize: "6",
+    timeframe: "12 Months",
+    engine: "Unreal Engine 5 (C++)",
+    introduction: "Shadow Protocol est un FPS tactique multijoueur où j'ai principalement travaillé sur le netcode et la réplication des états de jeu. L'objectif était d'offrir une expérience compétitive avec une latence minimale et une détection de hits précise côté serveur.",
+    sections: [
+      { heading: "Netcode & Réplication", content: "J'ai développé un système de réplication optimisé utilisant la prédiction côté client et la réconciliation serveur. Le système gère la compensation de lag pour assurer des hits précis même avec une latence élevée." },
+      { heading: "Hit Detection", content: "La détection de hits utilise un système de rewinding temporel côté serveur, comparant les positions des hitboxes au moment exact du tir du joueur. Cela permet une expérience juste pour tous les joueurs indépendamment de leur ping." },
+    ],
+  },
 ];
 
-const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, media: [{ type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }], github: "#", download: "#" },
+const projetsPerso: ProjectData[] = [
+  {
+    title: "Pixel Physics",
+    desc: "Moteur physique 2D from scratch avec détection de collision SAT.",
+    tech: "C++ · SDL2",
+    image: projectGame3,
+    media: [{ type: "image", src: projectGame3 }, { type: "image", src: projectGame1 }, { type: "image", src: projectGame2 }],
+    github: "#", download: "#",
+    role: "Solo Developer",
+    teamSize: "1",
+    timeframe: "3 Months",
+    engine: "SDL2 (C++)",
+    introduction: "Ce moteur physique 2D a été développé from scratch pour approfondir ma compréhension des algorithmes de détection de collision et de résolution de contraintes. J'ai implémenté le Separating Axis Theorem (SAT) et un solver itératif pour des simulations réalistes.",
+    sections: [
+      { heading: "Détection de Collision (SAT)", content: "L'implémentation du SAT permet de détecter les collisions entre polygones convexes de manière efficace. J'ai ajouté un broad-phase utilisant un spatial hash pour réduire le nombre de tests nécessaires." },
+    ],
+  },
+  {
+    title: "Dungeon Generator",
+    desc: "Génération procédurale de donjons avec BSP et wave function collapse.",
+    tech: "C# · Unity",
+    image: projectGame4,
+    media: [{ type: "image", src: projectGame4 }, { type: "image", src: projectGame5 }, { type: "image", src: projectGame3 }],
+    github: "#", download: "#",
+    role: "Solo Developer",
+    teamSize: "1",
+    timeframe: "6 Weeks",
+    engine: "Unity (C#)",
+    introduction: "Ce projet de génération procédurale combine l'algorithme BSP (Binary Space Partitioning) avec le Wave Function Collapse pour créer des donjons uniques et jouables à chaque exécution.",
+    sections: [
+      { heading: "Wave Function Collapse", content: "Mon implémentation du WFC utilise des tuiles personnalisées avec un système de sockets pour garantir la compatibilité entre les éléments adjacents. L'algorithme gère les cas d'échec avec un système de backtracking." },
+    ],
+  },
+  {
+    title: "Shader Lab",
+    desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.",
+    tech: "GLSL · OpenGL",
+    image: projectGame5,
+    media: [{ type: "image", src: projectGame5 }, { type: "image", src: projectGame2 }, { type: "image", src: projectGame4 }],
+    github: "#", download: "#",
+    role: "Graphics Programmer",
+    teamSize: "1",
+    timeframe: "Ongoing",
+    engine: "OpenGL (GLSL)",
+    introduction: "Shader Lab est une collection de shaders créatifs développés pour explorer les techniques de rendu en temps réel. Chaque shader est optimisé pour tourner à 60fps et utilise des techniques modernes de computer graphics.",
+    sections: [
+      { heading: "Eau Réaliste", content: "Le shader d'eau combine des normal maps animées, des réflexions screen-space et une simulation de caustiques pour un rendu réaliste. Le système de vagues utilise la superposition de fonctions sinusoïdales de Gerstner." },
+    ],
+  },
 ];
 
-const projetsDessin = [
-  { title: "Concept Art — Personnage", desc: "Character design pour un RPG fantastique.", tech: "Photoshop · Procreate", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
-  { title: "Environment Art", desc: "Illustration d'environnement post-apocalyptique.", tech: "Photoshop · Clip Studio", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
-  { title: "Storyboard — Cinématique", desc: "Storyboard pour une cinématique in-game.", tech: "Procreate · Photoshop", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
+const projetsDessin: ProjectData[] = [
+  { title: "Concept Art — Personnage", desc: "Character design pour un RPG fantastique.", tech: "Photoshop · Procreate", image: projectGame1, media: [{ type: "image", src: projectGame1 }, { type: "image", src: projectGame3 }], github: "#", download: "#" },
+  { title: "Environment Art", desc: "Illustration d'environnement post-apocalyptique.", tech: "Photoshop · Clip Studio", image: projectGame3, media: [{ type: "image", src: projectGame3 }, { type: "image", src: projectGame5 }], github: "#", download: "#" },
+  { title: "Storyboard — Cinématique", desc: "Storyboard pour une cinématique in-game.", tech: "Procreate · Photoshop", image: projectGame5, media: [{ type: "image", src: projectGame5 }, { type: "image", src: projectGame2 }], github: "#", download: "#" },
 ];
 
 const formations = [
@@ -176,7 +268,7 @@ type AboutTab = typeof aboutTabs[number]["key"];
 
 const Index = () => {
   const [certImage, setCertImage] = useState<string | null>(null);
-  const [projectLightbox, setProjectLightbox] = useState<{ media: MediaItem[]; index: number; title: string } | null>(null);
+  const [projectLightbox, setProjectLightbox] = useState<{ project: ProjectData; mediaIndex: number } | null>(null);
   const [proPage, setProPage] = useState(0);
   const [persoPage, setPersoPage] = useState(0);
   const [outilsTab, setOutilsTab] = useState<"Front-end" | "Back-end" | "UX / UI">("Front-end");
@@ -211,66 +303,124 @@ const Index = () => {
 
       {/* Project lightbox */}
       {projectLightbox && (() => {
-        const currentMedia = projectLightbox.media[projectLightbox.index];
-        const total = projectLightbox.media.length;
+        const proj = projectLightbox.project;
+        const currentMedia = proj.media[projectLightbox.mediaIndex];
+        const total = proj.media.length;
         return (
-        <div className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-md flex flex-col items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
-          <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + total) % total }); }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
+        <div className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md overflow-y-auto" onClick={() => setProjectLightbox(null)}>
+          <div className="max-w-3xl mx-auto px-4 sm:px-8 py-6" onClick={(e) => e.stopPropagation()}>
+            {/* Go Back */}
+            <button onClick={() => setProjectLightbox(null)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4 font-mono">
+              <ChevronLeft className="h-4 w-4" /> Go Back
+            </button>
 
-          <div className="relative max-w-2xl w-full animate-scale-in mx-4 sm:mx-16" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                {currentMedia.type === "video" && <Play className="h-4 w-4 text-accent fill-accent" />}
-                <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+            {/* Media Carousel */}
+            <div className="relative rounded-xl overflow-hidden border border-border mb-6">
+              <div className="relative aspect-video">
+                {currentMedia.type === "video" ? (
+                  <video key={projectLightbox.mediaIndex} src={currentMedia.src} controls autoPlay playsInline className="w-full h-full object-cover" />
+                ) : (
+                  <img src={currentMedia.src} alt={proj.title} className="w-full h-full object-cover" />
+                )}
               </div>
-              <button onClick={() => setProjectLightbox(null)} className="h-8 w-8 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-colors">
-                <X className="h-4 w-4" />
-              </button>
+              {total > 1 && (
+                <>
+                  <button onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: (projectLightbox.mediaIndex - 1 + total) % total })} className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-background/70 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background transition-all">
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: (projectLightbox.mediaIndex + 1) % total })} className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-background/70 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background transition-all">
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+              {/* Title overlay */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <h2 className="font-display text-2xl font-bold text-white">{proj.title}</h2>
+              </div>
             </div>
-            {currentMedia.type === "video" ? (
-              <video
-                key={projectLightbox.index}
-                src={currentMedia.src}
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-auto rounded-xl border border-accent/20 glow-accent"
-              />
-            ) : (
-              <img src={currentMedia.src} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
-            )}
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex items-center gap-3">
-                <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {total}</p>
-                {/* Media type indicators */}
-                <div className="flex gap-1">
-                  {projectLightbox.media.map((m, i) => (
-                    <button key={i} onClick={() => setProjectLightbox({ ...projectLightbox, index: i })} className={`h-1.5 rounded-full transition-all ${i === projectLightbox.index ? (m.type === "video" ? 'w-6 bg-accent' : 'w-6 bg-primary') : 'w-1.5 bg-border hover:bg-muted-foreground'}`} />
-                  ))}
+
+            {/* About + Project Info */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="bg-card border border-border rounded-xl p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">About</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{proj.desc}</p>
+              </div>
+              <div className="bg-card border border-border rounded-xl p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">Project Info</h3>
+                <div className="space-y-2.5">
+                  {proj.role && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <User className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Role:</span>
+                      <span className="text-foreground font-medium">{proj.role}</span>
+                    </div>
+                  )}
+                  {proj.teamSize && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Users className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Team Size:</span>
+                      <span className="text-foreground font-medium">{proj.teamSize}</span>
+                    </div>
+                  )}
+                  {proj.timeframe && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Target className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Time frame:</span>
+                      <span className="text-foreground font-medium">{proj.timeframe}</span>
+                    </div>
+                  )}
+                  {proj.engine && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Cpu className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Engine:</span>
+                      <span className="text-foreground font-medium">{proj.engine}</span>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="flex gap-3">
-                <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
-                  <Github className="h-4 w-4" />
-                </a>
-                <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
-                  <Globe className="h-4 w-4" />
-                </a>
+            </div>
+
+            {/* Introduction */}
+            {proj.introduction && (
+              <div className="mb-8">
+                <h3 className="font-display text-xl font-bold text-foreground mb-4">Introduction</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{proj.introduction}</p>
               </div>
+            )}
+
+            {/* Detail sections */}
+            {proj.sections && proj.sections.map((s, i) => (
+              <div key={i} className="mb-8">
+                <h3 className="font-display text-xl font-bold text-foreground mb-4">{s.heading}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.content}</p>
+              </div>
+            ))}
+
+            {/* Media gallery at bottom */}
+            {total > 1 && (
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {proj.media.map((m, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden border border-border cursor-pointer hover:border-primary/40 transition-all" onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: i })}>
+                    {m.type === "video" ? (
+                      <video src={m.src} className="w-full aspect-video object-cover" muted />
+                    ) : (
+                      <img src={m.src} alt={`${proj.title} ${i + 1}`} className="w-full aspect-video object-cover" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Links */}
+            <div className="flex gap-3 mb-10">
+              <a href={proj.github} className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all">
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+              <a href={proj.download} className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all">
+                <Globe className="h-4 w-4" /> Demo
+              </a>
             </div>
           </div>
-
-          <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % total }); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
         </div>
         );
       })()}
@@ -550,7 +700,7 @@ const Index = () => {
                     <h3 className="text-lg font-display font-bold text-foreground mb-2">{p.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{p.desc}</p>
                     <button
-                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
+                      onClick={() => setProjectLightbox({ project: p, mediaIndex: 0 })}
                       className="w-full py-3 border border-primary/30 bg-primary/5 rounded-lg text-primary text-sm font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
                     >
                       View Details <ArrowUpRight className="h-4 w-4" />
@@ -593,7 +743,7 @@ const Index = () => {
                     <h3 className="text-base font-display font-bold text-foreground mb-2">{p.title}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed mb-5 flex-1">{p.desc}</p>
                     <button
-                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
+                      onClick={() => setProjectLightbox({ project: p, mediaIndex: 0 })}
                       className="w-full py-2.5 border border-primary/30 bg-primary/5 rounded-lg text-primary text-xs font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
                     >
                       View Details <ArrowUpRight className="h-3.5 w-3.5" />
