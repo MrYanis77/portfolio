@@ -743,7 +743,7 @@ const Index = () => {
                     <h3 className="text-base font-display font-bold text-foreground mb-2">{p.title}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed mb-5 flex-1">{p.desc}</p>
                     <button
-                      onClick={() => setProjectLightbox({ media: p.media, index: 0, title: p.title })}
+                      onClick={() => setProjectLightbox({ project: p, mediaIndex: 0 })}
                       className="w-full py-2.5 border border-primary/30 bg-primary/5 rounded-lg text-primary text-xs font-mono uppercase tracking-wider hover:bg-primary/15 hover:border-primary/50 transition-all flex items-center justify-center gap-2"
                     >
                       View Details <ArrowUpRight className="h-3.5 w-3.5" />
