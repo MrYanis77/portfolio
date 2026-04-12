@@ -303,66 +303,124 @@ const Index = () => {
 
       {/* Project lightbox */}
       {projectLightbox && (() => {
-        const currentMedia = projectLightbox.media[projectLightbox.index];
-        const total = projectLightbox.media.length;
+        const proj = projectLightbox.project;
+        const currentMedia = proj.media[projectLightbox.mediaIndex];
+        const total = proj.media.length;
         return (
-        <div className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-md flex flex-col items-center justify-center p-6" onClick={() => setProjectLightbox(null)}>
-          <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index - 1 + total) % total }); }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
+        <div className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md overflow-y-auto" onClick={() => setProjectLightbox(null)}>
+          <div className="max-w-3xl mx-auto px-4 sm:px-8 py-6" onClick={(e) => e.stopPropagation()}>
+            {/* Go Back */}
+            <button onClick={() => setProjectLightbox(null)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4 font-mono">
+              <ChevronLeft className="h-4 w-4" /> Go Back
+            </button>
 
-          <div className="relative max-w-2xl w-full animate-scale-in mx-4 sm:mx-16" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                {currentMedia.type === "video" && <Play className="h-4 w-4 text-accent fill-accent" />}
-                <h3 className="font-display text-xl font-bold text-foreground">{projectLightbox.title}</h3>
+            {/* Media Carousel */}
+            <div className="relative rounded-xl overflow-hidden border border-border mb-6">
+              <div className="relative aspect-video">
+                {currentMedia.type === "video" ? (
+                  <video key={projectLightbox.mediaIndex} src={currentMedia.src} controls autoPlay playsInline className="w-full h-full object-cover" />
+                ) : (
+                  <img src={currentMedia.src} alt={proj.title} className="w-full h-full object-cover" />
+                )}
               </div>
-              <button onClick={() => setProjectLightbox(null)} className="h-8 w-8 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-colors">
-                <X className="h-4 w-4" />
-              </button>
+              {total > 1 && (
+                <>
+                  <button onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: (projectLightbox.mediaIndex - 1 + total) % total })} className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-background/70 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background transition-all">
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: (projectLightbox.mediaIndex + 1) % total })} className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-background/70 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background transition-all">
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+              {/* Title overlay */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <h2 className="font-display text-2xl font-bold text-white">{proj.title}</h2>
+              </div>
             </div>
-            {currentMedia.type === "video" ? (
-              <video
-                key={projectLightbox.index}
-                src={currentMedia.src}
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-auto rounded-xl border border-accent/20 glow-accent"
-              />
-            ) : (
-              <img src={currentMedia.src} alt={projectLightbox.title} className="w-full h-auto rounded-xl border border-primary/20 glow-primary" />
-            )}
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex items-center gap-3">
-                <p className="font-mono text-xs text-muted-foreground">{projectLightbox.index + 1} / {total}</p>
-                {/* Media type indicators */}
-                <div className="flex gap-1">
-                  {projectLightbox.media.map((m, i) => (
-                    <button key={i} onClick={() => setProjectLightbox({ ...projectLightbox, index: i })} className={`h-1.5 rounded-full transition-all ${i === projectLightbox.index ? (m.type === "video" ? 'w-6 bg-accent' : 'w-6 bg-primary') : 'w-1.5 bg-border hover:bg-muted-foreground'}`} />
-                  ))}
+
+            {/* About + Project Info */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="bg-card border border-border rounded-xl p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">About</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{proj.desc}</p>
+              </div>
+              <div className="bg-card border border-border rounded-xl p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">Project Info</h3>
+                <div className="space-y-2.5">
+                  {proj.role && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <User className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Role:</span>
+                      <span className="text-foreground font-medium">{proj.role}</span>
+                    </div>
+                  )}
+                  {proj.teamSize && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Users className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Team Size:</span>
+                      <span className="text-foreground font-medium">{proj.teamSize}</span>
+                    </div>
+                  )}
+                  {proj.timeframe && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Target className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Time frame:</span>
+                      <span className="text-foreground font-medium">{proj.timeframe}</span>
+                    </div>
+                  )}
+                  {proj.engine && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Cpu className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">Engine:</span>
+                      <span className="text-foreground font-medium">{proj.engine}</span>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="flex gap-3">
-                <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
-                  <Github className="h-4 w-4" />
-                </a>
-                <a href="#" className="h-8 w-8 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all">
-                  <Globe className="h-4 w-4" />
-                </a>
+            </div>
+
+            {/* Introduction */}
+            {proj.introduction && (
+              <div className="mb-8">
+                <h3 className="font-display text-xl font-bold text-foreground mb-4">Introduction</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{proj.introduction}</p>
               </div>
+            )}
+
+            {/* Detail sections */}
+            {proj.sections && proj.sections.map((s, i) => (
+              <div key={i} className="mb-8">
+                <h3 className="font-display text-xl font-bold text-foreground mb-4">{s.heading}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.content}</p>
+              </div>
+            ))}
+
+            {/* Media gallery at bottom */}
+            {total > 1 && (
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {proj.media.map((m, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden border border-border cursor-pointer hover:border-primary/40 transition-all" onClick={() => setProjectLightbox({ ...projectLightbox, mediaIndex: i })}>
+                    {m.type === "video" ? (
+                      <video src={m.src} className="w-full aspect-video object-cover" muted />
+                    ) : (
+                      <img src={m.src} alt={`${proj.title} ${i + 1}`} className="w-full aspect-video object-cover" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Links */}
+            <div className="flex gap-3 mb-10">
+              <a href={proj.github} className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all">
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+              <a href={proj.download} className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all">
+                <Globe className="h-4 w-4" /> Demo
+              </a>
             </div>
           </div>
-
-          <button
-            onClick={(e) => { e.stopPropagation(); setProjectLightbox({ ...projectLightbox, index: (projectLightbox.index + 1) % total }); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary transition-all active:scale-90 z-10"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
         </div>
         );
       })()}
