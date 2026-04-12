@@ -81,22 +81,114 @@ const experiences = [
 
 type MediaItem = { type: "image" | "video"; src: string };
 
-const projetsPro = [
-  { title: "Echoes of Valheim", desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.", tech: "Unreal 5 · C++", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
-  { title: "Shadow Protocol", desc: "FPS tactique multijoueur — netcode, hit detection, replication.", tech: "Unreal 5 · C++ · Steam SDK", image: projectGame2, media: [{ type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame1 }], github: "#", download: "#" },
-  // Pour ajouter une vidéo : { type: "video", src: "/videos/gameplay.mp4" }
+type ProjectData = {
+  title: string;
+  desc: string;
+  tech: string;
+  image: string;
+  media: MediaItem[];
+  github: string;
+  download: string;
+  role?: string;
+  teamSize?: string;
+  timeframe?: string;
+  engine?: string;
+  introduction?: string;
+  sections?: { heading: string; content: string }[];
+};
+
+const projetsPro: ProjectData[] = [
+  {
+    title: "Echoes of Valheim",
+    desc: "Action-RPG open world — systèmes de loot, inventaire, quêtes dynamiques.",
+    tech: "Unreal 5 · C++",
+    image: projectGame1,
+    media: [{ type: "image", src: projectGame1 }, { type: "image", src: projectGame3 }, { type: "image", src: projectGame5 }],
+    github: "#", download: "#",
+    role: "Gameplay Programmer",
+    teamSize: "4",
+    timeframe: "8 Months",
+    engine: "Unreal Engine 5 (C++)",
+    introduction: "Ce projet d'Action-RPG open world m'a permis de concevoir des systèmes de gameplay complexes comme le loot dynamique, l'inventaire modulaire et les quêtes procédurales. J'ai travaillé en étroite collaboration avec les game designers pour itérer rapidement sur les mécaniques de jeu et assurer une expérience fluide.",
+    sections: [
+      { heading: "Système de Loot", content: "J'ai implémenté un système de loot basé sur des tables de probabilité pondérées, avec des modificateurs de rareté et des bonus contextuels selon la zone et le niveau du joueur. Le système supporte le loot pooling pour optimiser les allocations mémoire." },
+      { heading: "Quêtes Dynamiques", content: "Le système de quêtes utilise un graphe de décision permettant des embranchements multiples. Chaque quête peut être influencée par les actions précédentes du joueur, créant une narration émergente unique à chaque partie." },
+    ],
+  },
+  {
+    title: "Shadow Protocol",
+    desc: "FPS tactique multijoueur — netcode, hit detection, replication.",
+    tech: "Unreal 5 · C++ · Steam SDK",
+    image: projectGame2,
+    media: [{ type: "image", src: projectGame2 }, { type: "image", src: projectGame4 }, { type: "image", src: projectGame1 }],
+    github: "#", download: "#",
+    role: "Network Programmer",
+    teamSize: "6",
+    timeframe: "12 Months",
+    engine: "Unreal Engine 5 (C++)",
+    introduction: "Shadow Protocol est un FPS tactique multijoueur où j'ai principalement travaillé sur le netcode et la réplication des états de jeu. L'objectif était d'offrir une expérience compétitive avec une latence minimale et une détection de hits précise côté serveur.",
+    sections: [
+      { heading: "Netcode & Réplication", content: "J'ai développé un système de réplication optimisé utilisant la prédiction côté client et la réconciliation serveur. Le système gère la compensation de lag pour assurer des hits précis même avec une latence élevée." },
+      { heading: "Hit Detection", content: "La détection de hits utilise un système de rewinding temporel côté serveur, comparant les positions des hitboxes au moment exact du tir du joueur. Cela permet une expérience juste pour tous les joueurs indépendamment de leur ping." },
+    ],
+  },
 ];
 
-const projetsPerso = [
-  { title: "Pixel Physics", desc: "Moteur physique 2D from scratch avec détection de collision SAT.", tech: "C++ · SDL2", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
-  { title: "Dungeon Generator", desc: "Génération procédurale de donjons avec BSP et wave function collapse.", tech: "C# · Unity", image: projectGame4, media: [{ type: "image" as const, src: projectGame4 }, { type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
-  { title: "Shader Lab", desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.", tech: "GLSL · OpenGL", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }, { type: "image" as const, src: projectGame4 }], github: "#", download: "#" },
+const projetsPerso: ProjectData[] = [
+  {
+    title: "Pixel Physics",
+    desc: "Moteur physique 2D from scratch avec détection de collision SAT.",
+    tech: "C++ · SDL2",
+    image: projectGame3,
+    media: [{ type: "image", src: projectGame3 }, { type: "image", src: projectGame1 }, { type: "image", src: projectGame2 }],
+    github: "#", download: "#",
+    role: "Solo Developer",
+    teamSize: "1",
+    timeframe: "3 Months",
+    engine: "SDL2 (C++)",
+    introduction: "Ce moteur physique 2D a été développé from scratch pour approfondir ma compréhension des algorithmes de détection de collision et de résolution de contraintes. J'ai implémenté le Separating Axis Theorem (SAT) et un solver itératif pour des simulations réalistes.",
+    sections: [
+      { heading: "Détection de Collision (SAT)", content: "L'implémentation du SAT permet de détecter les collisions entre polygones convexes de manière efficace. J'ai ajouté un broad-phase utilisant un spatial hash pour réduire le nombre de tests nécessaires." },
+    ],
+  },
+  {
+    title: "Dungeon Generator",
+    desc: "Génération procédurale de donjons avec BSP et wave function collapse.",
+    tech: "C# · Unity",
+    image: projectGame4,
+    media: [{ type: "image", src: projectGame4 }, { type: "image", src: projectGame5 }, { type: "image", src: projectGame3 }],
+    github: "#", download: "#",
+    role: "Solo Developer",
+    teamSize: "1",
+    timeframe: "6 Weeks",
+    engine: "Unity (C#)",
+    introduction: "Ce projet de génération procédurale combine l'algorithme BSP (Binary Space Partitioning) avec le Wave Function Collapse pour créer des donjons uniques et jouables à chaque exécution.",
+    sections: [
+      { heading: "Wave Function Collapse", content: "Mon implémentation du WFC utilise des tuiles personnalisées avec un système de sockets pour garantir la compatibilité entre les éléments adjacents. L'algorithme gère les cas d'échec avec un système de backtracking." },
+    ],
+  },
+  {
+    title: "Shader Lab",
+    desc: "Collection de shaders créatifs : eau, feu volumétrique, cel-shading.",
+    tech: "GLSL · OpenGL",
+    image: projectGame5,
+    media: [{ type: "image", src: projectGame5 }, { type: "image", src: projectGame2 }, { type: "image", src: projectGame4 }],
+    github: "#", download: "#",
+    role: "Graphics Programmer",
+    teamSize: "1",
+    timeframe: "Ongoing",
+    engine: "OpenGL (GLSL)",
+    introduction: "Shader Lab est une collection de shaders créatifs développés pour explorer les techniques de rendu en temps réel. Chaque shader est optimisé pour tourner à 60fps et utilise des techniques modernes de computer graphics.",
+    sections: [
+      { heading: "Eau Réaliste", content: "Le shader d'eau combine des normal maps animées, des réflexions screen-space et une simulation de caustiques pour un rendu réaliste. Le système de vagues utilise la superposition de fonctions sinusoïdales de Gerstner." },
+    ],
+  },
 ];
 
-const projetsDessin = [
-  { title: "Concept Art — Personnage", desc: "Character design pour un RPG fantastique.", tech: "Photoshop · Procreate", image: projectGame1, media: [{ type: "image" as const, src: projectGame1 }, { type: "image" as const, src: projectGame3 }], github: "#", download: "#" },
-  { title: "Environment Art", desc: "Illustration d'environnement post-apocalyptique.", tech: "Photoshop · Clip Studio", image: projectGame3, media: [{ type: "image" as const, src: projectGame3 }, { type: "image" as const, src: projectGame5 }], github: "#", download: "#" },
-  { title: "Storyboard — Cinématique", desc: "Storyboard pour une cinématique in-game.", tech: "Procreate · Photoshop", image: projectGame5, media: [{ type: "image" as const, src: projectGame5 }, { type: "image" as const, src: projectGame2 }], github: "#", download: "#" },
+const projetsDessin: ProjectData[] = [
+  { title: "Concept Art — Personnage", desc: "Character design pour un RPG fantastique.", tech: "Photoshop · Procreate", image: projectGame1, media: [{ type: "image", src: projectGame1 }, { type: "image", src: projectGame3 }], github: "#", download: "#" },
+  { title: "Environment Art", desc: "Illustration d'environnement post-apocalyptique.", tech: "Photoshop · Clip Studio", image: projectGame3, media: [{ type: "image", src: projectGame3 }, { type: "image", src: projectGame5 }], github: "#", download: "#" },
+  { title: "Storyboard — Cinématique", desc: "Storyboard pour une cinématique in-game.", tech: "Procreate · Photoshop", image: projectGame5, media: [{ type: "image", src: projectGame5 }, { type: "image", src: projectGame2 }], github: "#", download: "#" },
 ];
 
 const formations = [
