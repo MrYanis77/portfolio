@@ -1,10 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
-import projectGame1 from "@/assets/project-game-1.jpg";
-import projectGame2 from "@/assets/project-game-2.jpg";
-import projectGame3 from "@/assets/project-game-3.jpg";
-import projectGame4 from "@/assets/project-game-4.jpg";
-import projectGame5 from "@/assets/project-game-5.jpg";
 
 export type CarouselMedia = {
   type: "image" | "video";
@@ -15,13 +10,27 @@ export type CarouselMedia = {
 };
 
 const projects: CarouselMedia[] = [
-  { type: "image", src: projectGame1, title: "Void Station", category: "Unreal Engine 5", tech: "C++ / Blueprints" },
-  { type: "image", src: projectGame2, title: "Pixel Brawl", category: "2D Platformer", tech: "Unity / C#" },
-  { type: "image", src: projectGame3, title: "Ember Gate", category: "Action RPG", tech: "Custom Engine / C++" },
-  { type: "image", src: projectGame4, title: "Neon Command", category: "Sci-Fi Strategy", tech: "C++ / Custom Engine" },
-  { type: "image", src: projectGame5, title: "Dungeon Depths", category: "Roguelike RPG", tech: "C# / Unity" },
-  // Exemple vidéo — décommente et remplace le src par ton fichier .mp4
-  // { type: "video", src: "/videos/demo-reel.mp4", title: "Demo Reel", category: "Showreel", tech: "Gameplay" },
+  {
+    type: "image",
+    src: "/projets/alt-rh/accueil.png",
+    title: "Alt RH Consulting",
+    category: "Développement Web",
+    tech: "React / Tailwind"
+  },
+  {
+    type: "image",
+    src: "/Jeux/parcours/plateau.PNG",
+    title: "Parkours Warriors",
+    category: "Game Design",
+    tech: "Unity / C#"
+  },
+  {
+    type: "image",
+    src: "/dessin/dessin3.jpg",
+    title: "Créations Graphiques",
+    category: "Illustration",
+    tech: "Dessin"
+  },
 ];
 
 const ProjectCarousel = () => {
@@ -46,12 +55,15 @@ const ProjectCarousel = () => {
   }, [next, current]);
 
   return (
-    <div className="w-full">
-      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border shadow-[0_8px_30px_-4px_rgba(0,0,0,0.3)] dark:shadow-[0_8px_30px_-4px_rgba(255,255,255,0.15)]">
+    <div className="w-full relative group">
+      {/* Decorative background glow */}
+      <div className="absolute -inset-4 bg-primary/10 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+
+      <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-border shadow-[0_8px_30px_-4px_rgba(0,0,0,0.3)] dark:shadow-[0_8px_30px_-4px_rgba(255,255,255,0.15)] z-10">
         {projects.map((project, i) => (
           <div
             key={i}
-            className="absolute inset-0"
+            className="absolute inset-0 bg-[#0a0a0a] flex items-center justify-center"
             style={{
               opacity: i === current ? 1 : 0,
               transform: i === current ? "scale(1)" : "scale(1.05)",
@@ -62,7 +74,7 @@ const ProjectCarousel = () => {
             {project.type === "video" ? (
               <video
                 src={project.src}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
                 controls
                 playsInline
                 muted
@@ -70,18 +82,8 @@ const ProjectCarousel = () => {
                 onEnded={next}
               />
             ) : (
-              <img src={project.src} alt={project.title} className="h-full w-full object-cover" />
+              <img src={project.src} alt={project.title} className="h-full w-full object-contain" />
             )}
-            <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between pointer-events-none">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  {project.type === "video" && <Play className="h-3 w-3 text-accent fill-accent" />}
-                  <p className="font-mono text-[10px] text-accent uppercase tracking-[0.2em]">{project.category}</p>
-                </div>
-                <h3 className="text-lg font-display font-bold text-white drop-shadow-md">{project.title}</h3>
-              </div>
-              <span className="font-mono text-xs text-primary font-medium px-3 py-1 border border-primary/30 rounded-full bg-background/50 backdrop-blur-sm">{project.tech}</span>
-            </div>
           </div>
         ))}
 
